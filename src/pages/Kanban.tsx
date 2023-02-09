@@ -5,11 +5,7 @@ import KanbanTemp from '../templates/KanbanTemp'
 interface IKanbanProps {}
 
 const Kanban: React.FunctionComponent<IKanbanProps> = (props) => {
-	return (
-		<div>
-			<KanbanTemp />
-		</div>
-	)
+	return <KanbanTemp />
 }
 
 export default Kanban
