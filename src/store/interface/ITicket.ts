@@ -1,4 +1,4 @@
-export default interface Ticket {
-	id: number
-	text: string
+export default interface ITicket {
+  id: number
+  text: string
 }
