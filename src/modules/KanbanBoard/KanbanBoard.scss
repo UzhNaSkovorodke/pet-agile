@@ -49,26 +49,29 @@
 
 	.kanban__body__backlog {
 		.ticket {
-			background-color: rgb(243, 69, 69);
+			background-image: linear-gradient(to right, #e45754 0%, #b6100d 100%);
 		}
 		.ticket:hover {
-			background-color: rgb(179, 58, 58);
+			background-position: right center; /* change the direction of the change here */
+			color: #fff;
 		}
 	}
 	.kanban__body__progress {
 		.ticket {
-			background-color: rgb(226, 187, 79);
+			background-image: linear-gradient(to right, #f39d34 0%, #d17708 100%);
 		}
 		.ticket:hover {
-			background-color: rgb(185, 154, 69);
+			background-position: right center; /* change the direction of the change here */
+			color: #fff;
 		}
 	}
 	.kanban__body__done {
 		.ticket {
-			background-color: rgb(106, 194, 147);
+			background-image: linear-gradient(to right, #8ac06b 0%, #36830c 100%);
 		}
 		.ticket:hover {
-			background-color: rgb(100, 156, 126);
+			background-position: right center; /* change the direction of the change here */
+			color: #fff;
 		}
 	}
 }
@@ -78,6 +81,8 @@
 	height: 7rem;
 	border-radius: 10px;
 	cursor: pointer;
+	transition: 0.2s;
+	background-size: 200% auto;
 
 	display: flex;
 	justify-content: center;
@@ -86,4 +91,9 @@
 	color: white;
 	font-weight: 600;
 	font-size: 1.25rem;
+}
+.ticket_add {
+	opacity: 0.5;
+	font-size: 2rem;
+	font-weight: 600;
 }
