@@ -1,4 +1,5 @@
-const backlog: object[] = [
+const doneList: object[] = [
 	{ id: Date.now() + Math.random(), text: 'Сделать фичу' }
 ]
-export default backlog
+
+export default doneList

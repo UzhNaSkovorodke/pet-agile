@@ -1,7 +1,9 @@
 import * as React from 'react'
 
 import './KanbanBoard.scss'
-import backlog from './backlogHelper.js'
+import backlogList from './backlogHelper'
+import doneList from './doneHelper'
+import progressList from './progressHelper'
 
 interface IKanbanBoardProps {}
 
@@ -16,21 +18,25 @@ const KanbanBoard: React.FunctionComponent<IKanbanBoardProps> = (props) => {
 				</div>
 				<div className="kanban__body">
 					<div className="kanban__body__backlog kanban__body__element">
-						{backlog.map((item: any) => (
+						{backlogList.map((item: any) => (
 							<div className="ticket" key={item.id}>
 								{item.text}
 							</div>
 						))}
 					</div>
 					<div className="kanban__body__progress kanban__body__element">
-						<div className="ticket">ticket</div>
-						<div className="ticket">ticket</div>
+						{progressList.map((item: any) => (
+							<div className="ticket" key={item.id}>
+								{item.text}
+							</div>
+						))}
 					</div>
 					<div className="kanban__body__done kanban__body__element">
-						<div className="ticket">ticket</div>
-						<div className="ticket">ticket</div>
-						<div className="ticket">ticket</div>
-						<div className="ticket">ticket</div>
+						{doneList.map((item: any) => (
+							<div className="ticket" key={item.id}>
+								{item.text}
+							</div>
+						))}
 					</div>
 				</div>
 			</div>
