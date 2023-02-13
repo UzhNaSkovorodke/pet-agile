@@ -1,51 +1,38 @@
-.kanban__body {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+.kanban-body {
+  display: flex;
   background: white;
   border: solid 1px #bebaba;
   border-radius: 5px;
 
-  .kanban__body__element {
+  .kanban-body__element {
     border-radius: 5px;
     font-size: 1rem;
-    font-weight: 500;
 
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 8.5rem;
+    width: 33%;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: start;
   }
 
-  .kanban__body__backlog {
+  .element_backlog {
     .ticket {
       background-image: linear-gradient(to right, #e45754 0%, #b6100d 100%);
     }
-    .ticket:hover {
-      background-position: right center;
-      color: #fff;
-    }
   }
-  .kanban__body__progress {
+  .element_progress {
     .ticket {
       background-image: linear-gradient(to right, #f19f3a 0%, #c97003 100%);
     }
-    .ticket:hover {
-      background-position: right center;
-      color: #fff;
-    }
   }
-  .kanban__body__done {
+  .element_done {
     .ticket {
       background-image: linear-gradient(to right, #8ac06b 0%, #36830c 100%);
-    }
-    .ticket:hover {
-      background-position: right center;
-      color: #fff;
     }
   }
 }
 .ticket {
   margin: 0.8rem;
-  width: 90%;
+  width: 14rem;
   height: 7rem;
   border-radius: 10px;
   cursor: pointer;
@@ -59,6 +46,9 @@
   color: white;
   font-weight: 600;
   font-size: 1.25rem;
+}
+.ticket:hover {
+  background-position: right center;
 }
 .ticket_add {
   opacity: 0.5;

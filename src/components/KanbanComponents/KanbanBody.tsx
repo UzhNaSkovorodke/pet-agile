@@ -10,6 +10,7 @@ interface ITicket {
 }
 
 interface IKanbanBodyProps {
+  setIsActiveModal: any;
   TicketsState: {
     name: string;
     backlogTickets: Array<ITicket>;
@@ -18,13 +19,13 @@ interface IKanbanBodyProps {
   };
 }
 
-const KanbanBody: React.FunctionComponent<IKanbanBodyProps> = ({TicketsState}) => {
+const KanbanBody: React.FunctionComponent<IKanbanBodyProps> = ({TicketsState, setIsActiveModal}) => {
   const dispatch = useDispatch();
 
   const AddTicketHandler = function (type: string) {
     const ticket = {
       id: Date.now(),
-      text: 'Cliccccck'
+      text: 'Новый таск'
     };
 
     switch (type) {
@@ -42,10 +43,10 @@ const KanbanBody: React.FunctionComponent<IKanbanBodyProps> = ({TicketsState}) =
   };
 
   return (
-    <div className="kanban__body">
-      <div className="kanban__body__backlog kanban__body__element">
+    <div className="kanban-body">
+      <div className="kanban-body__element element_backlog">
         {TicketsState.backlogTickets.map((item: any) => (
-          <div className="ticket" key={item.id}>
+          <div className="ticket" onClick={() => setIsActiveModal(true)} key={item.id}>
             {item.text}
           </div>
         ))}
@@ -53,9 +54,9 @@ const KanbanBody: React.FunctionComponent<IKanbanBodyProps> = ({TicketsState}) =
           +
         </button>
       </div>
-      <div className="kanban__body__progress kanban__body__element">
+      <div className="kanban-body__element element_progress">
         {TicketsState.processTickets.map((item: any) => (
-          <div className="ticket" key={item.id}>
+          <div className="ticket" onClick={() => setIsActiveModal(true)} key={item.id}>
             {item.text}
           </div>
         ))}
@@ -63,9 +64,9 @@ const KanbanBody: React.FunctionComponent<IKanbanBodyProps> = ({TicketsState}) =
           +
         </button>
       </div>
-      <div className="kanban__body__done kanban__body__element">
+      <div className="kanban-body__element element_done">
         {TicketsState.doneTickets.map((item: any) => (
-          <div className="ticket" key={item.id}>
+          <div className="ticket" onClick={() => setIsActiveModal(true)} key={item.id}>
             {item.text}
           </div>
         ))}

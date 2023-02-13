@@ -1,11 +1,11 @@
-.kanban__header {
+.kanban-header {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
 
   background: white;
   margin-bottom: 0.5rem;
 
-  .kanban__header__title {
+  .kanban-header__title {
     width: 100%;
     border-radius: 5px;
     height: 3rem;

@@ -6,16 +6,20 @@ import type {RootState} from '../../store/store';
 
 import './KanbanBoard.scss';
 
-interface IKanbanBoardProps {}
+interface IKanbanBoardProps {
+  setIsActiveModal: any;
+}
 
-const KanbanBoard: React.FunctionComponent<IKanbanBoardProps> = props => {
+const KanbanBoard: React.FunctionComponent<IKanbanBoardProps> = ({setIsActiveModal}) => {
   const TicketsState = useSelector((state: RootState) => state.tickets);
 
   return (
-    <div className="kanbanWrapper">
-      <div className="kanban">
-        <KanbanHeader />
-        <KanbanBody TicketsState={TicketsState} />
+    <div>
+      <div className="kanbanWrapper">
+        <div className="kanban">
+          <KanbanHeader />
+          <KanbanBody setIsActiveModal={setIsActiveModal} TicketsState={TicketsState} />
+        </div>
       </div>
     </div>
   );
