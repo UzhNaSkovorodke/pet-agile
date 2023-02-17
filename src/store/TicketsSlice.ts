@@ -5,41 +5,32 @@ import ITicket from './interface/ITicket';
 
 export interface TicketState {
   name: string;
-  backlogTickets: Array<ITicket>;
-  processTickets: Array<ITicket>;
-  doneTickets: Array<ITicket>;
+  ticketsList: Array<ITicket>;
 }
 
 const initialState: TicketState = {
   name: 'tickets',
-  backlogTickets: [
-    {id: 1, text: 'сделать систему'},
-    {id: 2, text: 'сделать scrum'}
-  ],
-  processTickets: [
-    {id: 1, text: 'сделать систему'},
-    {id: 2, text: 'сделать scrum'}
-  ],
-  doneTickets: [
-    {id: 1, text: 'сделать систему'},
-    {id: 2, text: 'сделать scrum'}
+  ticketsList: [
+    {id: 1, text: 'сделать систему', type: 'backlog'},
+    {id: 2, text: 'сделать scrum', type: 'backlog'},
+    {id: 3, text: 'делаю систему', type: 'process'},
+    {id: 4, text: 'делаю scrum', type: 'process'},
+    {id: 5, text: 'сделал систему', type: 'done'},
+    {id: 6, text: 'сделал scrum', type: 'done'}
   ]
 };
 export const TicketsSlice = createSlice({
   name: 'counter',
   initialState,
   reducers: {
-    addBacklogTicket: (state, action: PayloadAction<ITicket>) => {
-      state.backlogTickets.push(action.payload);
+    addTicket: (state, action: PayloadAction<ITicket>) => {
+      state.ticketsList.push(action.payload);
     },
-    addProcessTicket: (state, action: PayloadAction<ITicket>) => {
-      state.processTickets.push(action.payload);
-    },
-    addDoneTicket: (state, action: PayloadAction<ITicket>) => {
-      state.doneTickets.push(action.payload);
+    deleteTicket: (state, action: PayloadAction<number>) => {
+      state.ticketsList = [...state.ticketsList.filter(ticket => ticket.id !== action.payload)];
     }
   }
 });
-export const {addBacklogTicket, addProcessTicket, addDoneTicket} = TicketsSlice.actions;
+export const {addTicket, deleteTicket} = TicketsSlice.actions;
 
 export default TicketsSlice.reducer;
