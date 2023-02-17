@@ -5,16 +5,12 @@
   height: 6.5rem;
   cursor: pointer;
 
-  display: flex;
-  align-items: flex-start;
-
   color: black;
   font-weight: 600;
   font-size: 1.2rem;
 }
-
 .ticketWrapper:hover {
-  background-position: right center;
+  background: rgb(233, 233, 233);
 }
 .ticket__title {
   color: black;

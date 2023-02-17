@@ -46,7 +46,7 @@ const KanbanTicket: React.FunctionComponent<IKanbanTicketProps> = ({children, it
       onDragOver={e => dragOverHandler(e)}
       onDrop={e => dropHandler(e, item)}
     >
-      <div className={styles.ticket}>{children}</div>
+      {children}
     </div>
   );
 };

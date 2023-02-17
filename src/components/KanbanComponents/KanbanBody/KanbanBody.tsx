@@ -1,4 +1,7 @@
+import {useSelector} from 'react-redux';
+
 import ITicket from '../../../store/interface/ITicket';
+import {RootState} from '../../../store/store';
 import KanbanTicket from '../KanbanTicket/KanbanTicket';
 
 import './KanbanBody.scss';
@@ -7,18 +10,9 @@ interface IKanbanBodyProps {
   setIsActiveModal: React.Dispatch<React.SetStateAction<boolean>>;
   setIdOfExistsTask: React.Dispatch<React.SetStateAction<number | null>>;
   setTaskItem: React.Dispatch<React.SetStateAction<ITicket>>;
-  TicketsState: {
-    name: string;
-    ticketsList: Array<ITicket>;
-  };
 }
 
-const KanbanBody: React.FunctionComponent<IKanbanBodyProps> = ({
-  TicketsState,
-  setTaskItem,
-  setIsActiveModal,
-  setIdOfExistsTask
-}) => {
+const KanbanBody: React.FunctionComponent<IKanbanBodyProps> = ({setTaskItem, setIsActiveModal, setIdOfExistsTask}) => {
   function modalActiveHandler(item?: ITicket, type?: any) {
     if (item) {
       setTaskItem(item);
@@ -35,7 +29,9 @@ const KanbanBody: React.FunctionComponent<IKanbanBodyProps> = ({
     setIsActiveModal(true);
   }
 
+  const TicketsState = useSelector((state: RootState) => state.tickets);
   return (
+    //комм сделать нормальный компонент для элемента body
     <div className="kanban-body">
       <div className="kanban-body__element element_backlog">
         {TicketsState.ticketsList
