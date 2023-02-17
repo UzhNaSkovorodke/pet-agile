@@ -1,0 +1,58 @@
+.kanban-body {
+  display: flex;
+  background: white;
+  border: solid 1px #bebaba;
+  border-radius: 5px;
+
+  .kanban-body__element {
+    border-radius: 5px;
+    font-size: 1rem;
+
+    width: 33%;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: start;
+  }
+
+  .element_backlog {
+    .ticketWrapper {
+      border-left: solid 4px #cc2b3d;
+      border-top: solid 2px #dfdddd;
+      border-right: solid 2px #dfdddd;
+      border-bottom: solid 2px #dfdddd;
+    }
+  }
+  .element_process {
+    .ticketWrapper {
+      border-left: solid 4px #009ccc;
+      border-top: solid 2px #dfdddd;
+      border-right: solid 2px #dfdddd;
+      border-bottom: solid 2px #dfdddd;
+    }
+  }
+  .element_done {
+    .ticketWrapper {
+      border-left: solid 4px #00cc2c;
+      border-top: solid 2px #dfdddd;
+      border-right: solid 2px #dfdddd;
+      border-bottom: solid 2px #dfdddd;
+    }
+  }
+}
+
+.button_add {
+  margin: 0.8rem;
+  width: 40%;
+  height: 6.5rem;
+  cursor: pointer;
+  background: white;
+
+  color: black;
+  font-weight: 600;
+  font-size: 1.5rem;
+  border: solid 4px white;
+}
+.button_add:hover {
+  background: rgb(224, 224, 224);
+  transition: 0.2s;
+}

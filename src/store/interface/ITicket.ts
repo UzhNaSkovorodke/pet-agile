@@ -1,5 +1,6 @@
 export default interface ITicket {
   id: number;
-  text: string;
+  title: string;
+  description: string;
   type: string;
 }
