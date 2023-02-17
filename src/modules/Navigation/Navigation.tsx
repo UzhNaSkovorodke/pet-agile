@@ -1,19 +1,19 @@
-import * as React from 'react'
+import * as React from 'react';
 
-import styles from './Navigation.module.scss'
+import styles from './Navigation.module.scss';
 
 interface INavigationProps {}
 
-const Navigation: React.FunctionComponent<INavigationProps> = (props) => {
-	return (
-		<nav className={styles.nav}>
-			<div className={styles.nav_leftSide}>
-				<div>Logo</div>
-				<div>Dashboards</div>
-			</div>
-			<div>Auth</div>
-		</nav>
-	)
-}
+const Navigation: React.FunctionComponent<INavigationProps> = props => {
+  return (
+    <nav className={styles.nav}>
+      <div className={styles.nav_leftSide}>
+        <div>Logo</div>
+        <div>Dashboards</div>
+      </div>
+      <div>Auth</div>
+    </nav>
+  );
+};
 
-export default Navigation
+export default Navigation;

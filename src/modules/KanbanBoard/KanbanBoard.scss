@@ -1,89 +1,13 @@
 .kanbanWrapper {
-	display: flex;
-	justify-content: center;
-	margin-top: 4rem;
-	padding-bottom: 10rem;
+  display: flex;
+  justify-content: center;
+
+  padding-bottom: 10rem;
 }
 .kanban {
-	width: 80%;
-	padding: 1.5rem 1.5rem;
-	background: #f2f2f2;
-	border-radius: 10px;
-}
-.kanban__header {
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
-
-	background: white;
-	margin-bottom: 0.5rem;
-	.kanban__header__title {
-		width: 100%;
-		border-radius: 5px;
-		height: 3rem;
-		border: solid 1px #bebaba;
-
-		display: flex;
-		justify-content: center;
-		align-items: center;
-
-		font-size: 1.5rem;
-		font-weight: 500;
-	}
-}
-.kanban__body {
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
-	background: white;
-	border: solid 1px #bebaba;
-	border-radius: 5px;
-
-	.kanban__body__element {
-		border-radius: 5px;
-		font-size: 1rem;
-		font-weight: 500;
-
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-		grid-template-rows: 8.5rem;
-	}
-
-	.kanban__body__backlog {
-		.ticket {
-			background-color: rgb(243, 69, 69);
-		}
-		.ticket:hover {
-			background-color: rgb(179, 58, 58);
-		}
-	}
-	.kanban__body__progress {
-		.ticket {
-			background-color: rgb(226, 187, 79);
-		}
-		.ticket:hover {
-			background-color: rgb(185, 154, 69);
-		}
-	}
-	.kanban__body__done {
-		.ticket {
-			background-color: rgb(106, 194, 147);
-		}
-		.ticket:hover {
-			background-color: rgb(100, 156, 126);
-		}
-	}
-}
-.ticket {
-	margin: 0.8rem;
-	width: 90%;
-	height: 7rem;
-	border-radius: 10px;
-	cursor: pointer;
-
-	display: flex;
-	justify-content: center;
-	align-items: center;
-
-	color: white;
-	font-weight: 600;
-	font-size: 1.25rem;
+  margin-top: 4rem;
+  width: 80%;
+  padding: 1.5rem 1.5rem;
+  background: #f2f2f2;
+  border-radius: 10px;
 }
