@@ -1,4 +1,4 @@
-import KanbanBody from './KanbanBody';
-import KanbanHeader from './KanbanHeader';
+import KanbanBody from './KanbanBody/KanbanBody';
+import KanbanHeader from './kanbanHeader/KanbanHeader';
 
 export {KanbanBody, KanbanHeader};

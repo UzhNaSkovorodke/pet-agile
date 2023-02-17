@@ -11,16 +11,13 @@ export interface TicketState {
 const initialState: TicketState = {
   name: 'tickets',
   ticketsList: [
-    {id: 1, text: 'сделать систему', type: 'backlog'},
-    {id: 2, text: 'сделать scrum', type: 'backlog'},
-    {id: 3, text: 'делаю систему', type: 'process'},
-    {id: 4, text: 'делаю scrum', type: 'process'},
-    {id: 5, text: 'сделал систему', type: 'done'},
-    {id: 6, text: 'сделал scrum', type: 'done'}
+    {id: 1, title: 'Сделать систему', description: 'Делаю систему авторизации', type: 'backlog'},
+    {id: 2, title: 'Делаю систему', description: 'Делаю систему авторизации', type: 'process'},
+    {id: 3, title: 'Сделал систему', description: 'Делаю систему авторизации', type: 'done'}
   ]
 };
 export const TicketsSlice = createSlice({
-  name: 'counter',
+  name: 'TicketSlice',
   initialState,
   reducers: {
     addTicket: (state, action: PayloadAction<ITicket>) => {

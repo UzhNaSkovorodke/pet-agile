@@ -1,23 +1,24 @@
 import * as React from 'react';
 import {useDispatch} from 'react-redux';
 
-import {addTicket, deleteTicket} from '../../store/TicketsSlice';
+import {addTicket, deleteTicket} from '../../../store/TicketsSlice';
+import ITicket from '../../../store/interface/ITicket';
 
-import {TItem} from './KanbanBody';
-import './KanbanBody.scss';
+import styles from './KanbanTicket.module.scss';
+import './KanbanTicket.scss';
 
 interface IKanbanTicketProps {
   setIsActiveModal: any;
   children?: JSX.Element | JSX.Element[] | string | string[];
-  item: TItem;
+  item: ITicket;
 }
 
-let currentTask: TItem = {id: 0, text: '', type: ''};
+let currentTask: ITicket = {id: 0, title: '', description: '', type: ''};
 
 const KanbanTicket: React.FunctionComponent<IKanbanTicketProps> = ({setIsActiveModal, children, item}) => {
   const dispatch = useDispatch();
 
-  function dragStartHandler(e: React.FormEvent<HTMLDivElement>, item: TItem) {
+  function dragStartHandler(e: React.FormEvent<HTMLDivElement>, item: ITicket) {
     currentTask = {...item};
   }
 
@@ -27,7 +28,7 @@ const KanbanTicket: React.FunctionComponent<IKanbanTicketProps> = ({setIsActiveM
     e.preventDefault();
   }
 
-  function dropHandler(e: React.FormEvent<HTMLDivElement>, item: TItem) {
+  function dropHandler(e: React.FormEvent<HTMLDivElement>, item: ITicket) {
     e.preventDefault();
     dispatch(deleteTicket(currentTask.id));
     currentTask.type = item.type;
@@ -36,7 +37,7 @@ const KanbanTicket: React.FunctionComponent<IKanbanTicketProps> = ({setIsActiveM
 
   return (
     <div
-      className="ticket"
+      className="ticketWrapper"
       draggable={true}
       onClick={() => setIsActiveModal(true)}
       onDragStart={e => dragStartHandler(e, item)}
@@ -45,7 +46,7 @@ const KanbanTicket: React.FunctionComponent<IKanbanTicketProps> = ({setIsActiveM
       onDragOver={e => dragOverHandler(e)}
       onDrop={e => dropHandler(e, item)}
     >
-      {children}
+      <div className={styles.ticket}>{children}</div>
     </div>
   );
 };

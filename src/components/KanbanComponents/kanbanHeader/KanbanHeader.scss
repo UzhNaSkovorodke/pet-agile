@@ -7,7 +7,6 @@
 
   .kanban-header__title {
     width: 100%;
-    border-radius: 5px;
     height: 3rem;
     border: solid 1px #bebaba;
 
@@ -17,5 +16,11 @@
 
     font-size: 1.5rem;
     font-weight: 500;
+  }
+  .title_backlog {
+    border-top-left-radius: 5px;
+  }
+  .title_done {
+    border-top-right-radius: 5px;
   }
 }
