@@ -1,32 +1,39 @@
-import {useDispatch} from 'react-redux';
-
-import {addTicket} from '../../../store/TicketsSlice';
 import ITicket from '../../../store/interface/ITicket';
 import KanbanTicket from '../KanbanTicket/KanbanTicket';
 
 import './KanbanBody.scss';
 
 interface IKanbanBodyProps {
-  setIsActiveModal: any;
+  setIsActiveModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setIdOfExistsTask: React.Dispatch<React.SetStateAction<number | null>>;
+  setTaskItem: React.Dispatch<React.SetStateAction<ITicket>>;
   TicketsState: {
     name: string;
     ticketsList: Array<ITicket>;
   };
 }
 
-const KanbanBody: React.FunctionComponent<IKanbanBodyProps> = ({TicketsState, setIsActiveModal}) => {
-  const dispatch = useDispatch();
-
-  const AddTicketHandler = function (type: string) {
-    const ticket: ITicket = {
-      id: Date.now(),
-      title: 'Новый таск',
-      description: 'Новое описание',
-      type: type
-    };
-
-    dispatch(addTicket(ticket));
-  };
+const KanbanBody: React.FunctionComponent<IKanbanBodyProps> = ({
+  TicketsState,
+  setTaskItem,
+  setIsActiveModal,
+  setIdOfExistsTask
+}) => {
+  function modalActiveHandler(item?: ITicket, type?: any) {
+    if (item) {
+      setTaskItem(item);
+      setIdOfExistsTask(item.id);
+    } else {
+      setTaskItem({
+        id: Date.now() + Math.random() * 10,
+        title: '',
+        description: '',
+        type: type
+      });
+      setIdOfExistsTask(null);
+    }
+    setIsActiveModal(true);
+  }
 
   return (
     <div className="kanban-body">
@@ -34,13 +41,13 @@ const KanbanBody: React.FunctionComponent<IKanbanBodyProps> = ({TicketsState, se
         {TicketsState.ticketsList
           .filter(ticket => ticket.type === 'backlog')
           .map((item: ITicket) => (
-            <KanbanTicket setIsActiveModal={setIsActiveModal} item={item} key={item.id}>
+            <KanbanTicket modalActiveHandler={modalActiveHandler} item={item} key={Date.now() + Math.random() * 10}>
               <div className="ticket__title">{item.title}</div>
               <div className="ticket__description">{item.description}</div>
             </KanbanTicket>
           ))}
 
-        <button onClick={() => AddTicketHandler('backlog')} className="button_add">
+        <button onClick={() => modalActiveHandler(undefined, 'backlog')} className="button_add">
           +
         </button>
       </div>
@@ -49,13 +56,13 @@ const KanbanBody: React.FunctionComponent<IKanbanBodyProps> = ({TicketsState, se
         {TicketsState.ticketsList
           .filter(ticket => ticket.type === 'process')
           .map((item: ITicket) => (
-            <KanbanTicket setIsActiveModal={setIsActiveModal} item={item} key={item.id}>
+            <KanbanTicket modalActiveHandler={modalActiveHandler} item={item} key={Date.now() + Math.random() * 10}>
               <div className="ticket__title">{item.title}</div>
               <div className="ticket__description">{item.description}</div>
             </KanbanTicket>
           ))}
 
-        <button onClick={() => AddTicketHandler('process')} className="button_add">
+        <button onClick={() => modalActiveHandler(undefined, 'process')} className="button_add">
           +
         </button>
       </div>
@@ -64,14 +71,14 @@ const KanbanBody: React.FunctionComponent<IKanbanBodyProps> = ({TicketsState, se
         {TicketsState.ticketsList
           .filter(ticket => ticket.type === 'done')
           .map((item: ITicket) => (
-            <KanbanTicket setIsActiveModal={setIsActiveModal} item={item} key={item.id}>
+            <KanbanTicket modalActiveHandler={modalActiveHandler} item={item} key={Date.now() + Math.random() * 10}>
               <div className="ticket__title">{item.title}</div>
               <div className="ticket__description">{item.description}</div>
             </KanbanTicket>
           ))}
 
-        <button onClick={() => AddTicketHandler('done')} className="button_add">
-          <div>+</div>
+        <button onClick={() => modalActiveHandler(undefined, 'done')} className="button_add">
+          +
         </button>
       </div>
     </div>

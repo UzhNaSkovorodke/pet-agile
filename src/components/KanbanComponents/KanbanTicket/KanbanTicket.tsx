@@ -8,14 +8,14 @@ import styles from './KanbanTicket.module.scss';
 import './KanbanTicket.scss';
 
 interface IKanbanTicketProps {
-  setIsActiveModal: any;
+  modalActiveHandler: (item: ITicket) => void;
   children?: JSX.Element | JSX.Element[] | string | string[];
   item: ITicket;
 }
 
 let currentTask: ITicket = {id: 0, title: '', description: '', type: ''};
 
-const KanbanTicket: React.FunctionComponent<IKanbanTicketProps> = ({setIsActiveModal, children, item}) => {
+const KanbanTicket: React.FunctionComponent<IKanbanTicketProps> = ({children, item, modalActiveHandler}) => {
   const dispatch = useDispatch();
 
   function dragStartHandler(e: React.FormEvent<HTMLDivElement>, item: ITicket) {
@@ -39,7 +39,7 @@ const KanbanTicket: React.FunctionComponent<IKanbanTicketProps> = ({setIsActiveM
     <div
       className="ticketWrapper"
       draggable={true}
-      onClick={() => setIsActiveModal(true)}
+      onClick={() => modalActiveHandler(item)}
       onDragStart={e => dragStartHandler(e, item)}
       onDragLeave={e => dragEndHandler(e)}
       onDragEnd={e => dragEndHandler(e)}
