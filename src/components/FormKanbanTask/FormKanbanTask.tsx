@@ -3,7 +3,7 @@ import {useDispatch} from 'react-redux';
 
 import {addTicket, deleteTicket} from '../../store/TicketsSlice';
 
-import styles from './KanbanFormTask.module.scss';
+import styles from './FormKanbanTask.module.scss';
 
 interface IKanbanFormTaskProps {
   taskItem: any;

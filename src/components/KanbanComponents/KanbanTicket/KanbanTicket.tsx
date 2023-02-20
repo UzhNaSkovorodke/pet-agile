@@ -4,7 +4,6 @@ import {useDispatch} from 'react-redux';
 import {addTicket, deleteTicket} from '../../../store/TicketsSlice';
 import ITicket from '../../../store/interface/ITicket';
 
-import styles from './KanbanTicket.module.scss';
 import './KanbanTicket.scss';
 
 interface IKanbanTicketProps {
@@ -34,7 +33,7 @@ const KanbanTicket: React.FunctionComponent<IKanbanTicketProps> = ({children, it
     currentTask.type = item.type;
     dispatch(addTicket(currentTask));
   }
-
+  console.log('<KanbanTicket/> render');
   return (
     <div
       className="ticketWrapper"
