@@ -1,37 +1,31 @@
 import * as React from 'react';
+import {useDispatch} from 'react-redux';
 
 import ITicket from '../../../store/interface/ITicket';
+import {setHoldTask, setIdHoldTask} from '../../../store/slices/HoldTaskSlice';
 import KanbanTicket from '../KanbanTicket/KanbanTicket';
 
 import './KanbanElement.scss';
 
 interface IKanbanElementProps {
-  setTaskItem: React.Dispatch<React.SetStateAction<ITicket>>;
-  setIdOfExistsTask: React.Dispatch<React.SetStateAction<number | null>>;
   setIsActiveModal: React.Dispatch<React.SetStateAction<boolean>>;
   TicketsState: {name: string; ticketsList: ITicket[]};
   typeOfElement: string;
 }
 
 const KanbanElement: React.FunctionComponent<IKanbanElementProps> = ({
-  setIdOfExistsTask,
-  setTaskItem,
   setIsActiveModal,
   TicketsState,
   typeOfElement
 }) => {
+  const dispatch = useDispatch();
+
   function modalActiveHandler(item?: ITicket, type?: any) {
     if (item) {
-      setTaskItem(item);
-      setIdOfExistsTask(item.id);
+      dispatch(setHoldTask(item));
+      dispatch(setIdHoldTask(item.id));
     } else {
-      setTaskItem({
-        id: Date.now() + Math.random() * 10,
-        title: '',
-        description: '',
-        type: type
-      });
-      setIdOfExistsTask(null);
+      dispatch(setHoldTask({id: Date.now() + Math.random() * 10, title: '', description: '', type: type}));
     }
     setIsActiveModal(true);
   }

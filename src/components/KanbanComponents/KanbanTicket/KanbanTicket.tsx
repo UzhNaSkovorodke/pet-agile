@@ -1,8 +1,8 @@
 import * as React from 'react';
 import {useDispatch} from 'react-redux';
 
-import {addTicket, deleteTicket} from '../../../store/TicketsSlice';
 import ITicket from '../../../store/interface/ITicket';
+import {addTicket, deleteTicket} from '../../../store/slices/TicketListSlice';
 
 import './KanbanTicket.scss';
 
@@ -16,13 +16,11 @@ let currentTask: ITicket = {id: 0, title: '', description: '', type: ''};
 
 const KanbanTicket: React.FunctionComponent<IKanbanTicketProps> = ({children, modalActiveHandler, item}) => {
   const dispatch = useDispatch();
-  const currentStyle: any = '';
 
-  function dragStartHandler(e: React.FormEvent<HTMLDivElement>) {
+  function dragStartHandler() {
     currentTask = {...item};
   }
 
-  function dragEndHandler(e: any) {}
   function dragLeaveHandler(e: any) {
     e.target.style.background = '';
   }
@@ -43,9 +41,8 @@ const KanbanTicket: React.FunctionComponent<IKanbanTicketProps> = ({children, mo
       className="ticketWrapper"
       draggable={true}
       onClick={() => modalActiveHandler(item)}
-      onDragStart={e => dragStartHandler(e)}
+      onDragStart={e => dragStartHandler()}
       onDragLeave={e => dragLeaveHandler(e)}
-      onDragEnd={e => dragEndHandler(e)}
       onDragOver={e => dragOverHandler(e)}
       onDrop={e => dropHandler(e)}
     >

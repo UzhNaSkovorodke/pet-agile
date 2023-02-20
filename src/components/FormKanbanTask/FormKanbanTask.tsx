@@ -1,60 +1,43 @@
 import * as React from 'react';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 
-import {addTicket, deleteTicket} from '../../store/TicketsSlice';
-import ITicket from '../../store/interface/ITicket';
+import {setHoldTask} from '../../store/slices/HoldTaskSlice';
+import {addTicket, deleteTicket} from '../../store/slices/TicketListSlice';
+import {RootState} from '../../store/store';
 
 import styles from './FormKanbanTask.module.scss';
 
 interface IKanbanFormTaskProps {
-  taskItem: ITicket;
-  setTaskItem: React.Dispatch<React.SetStateAction<ITicket>>;
   setIsActiveModal: React.Dispatch<React.SetStateAction<boolean>>;
-  idOfExistsTask: number | null;
-  setIdOfExistsTask: React.Dispatch<React.SetStateAction<number | null>>;
 }
 
-const KanbanFormTask: React.FunctionComponent<IKanbanFormTaskProps> = ({
-  taskItem,
-  setTaskItem,
-  idOfExistsTask,
-  setIsActiveModal,
-  setIdOfExistsTask
-}) => {
+const KanbanFormTask: React.FunctionComponent<IKanbanFormTaskProps> = ({setIsActiveModal}) => {
   const dispatch = useDispatch();
+  const HoldTask = useSelector((state: RootState) => state.holdTask.holdTask);
+  const TicketsState = useSelector((state: RootState) => state.ticketList);
 
   function changeTitleHandler(event: any) {
-    const taskItemObj = {...taskItem};
+    const taskItemObj = {...HoldTask};
     taskItemObj.title = event.target.value;
-    setTaskItem(taskItemObj);
+    dispatch(setHoldTask(taskItemObj));
   }
   function changeDescriptionHandler(event: any) {
-    const taskItemObj = {...taskItem};
+    const taskItemObj = {...HoldTask};
     taskItemObj.description = event.target.value;
-    setTaskItem(taskItemObj);
+    dispatch(setHoldTask(taskItemObj));
   }
 
   function taskCreator() {
-    if (idOfExistsTask) {
-      dispatch(deleteTicket(idOfExistsTask));
-      dispatch(addTicket(taskItem));
-      setIdOfExistsTask(null);
-      setIsActiveModal(false);
-    } else {
-      dispatch(addTicket(taskItem));
+    {
+      dispatch(deleteTicket(HoldTask.id));
+      dispatch(addTicket(HoldTask));
       setIsActiveModal(false);
     }
   }
 
   function taskRemove() {
-    if (idOfExistsTask) {
-      dispatch(deleteTicket(idOfExistsTask));
-      setIdOfExistsTask(null);
-      setIsActiveModal(false);
-    } else {
-      dispatch(addTicket(taskItem));
-      setIsActiveModal(false);
-    }
+    dispatch(deleteTicket(HoldTask.id));
+    setIsActiveModal(false);
   }
   return (
     <div className={styles.modal}>
@@ -67,7 +50,7 @@ const KanbanFormTask: React.FunctionComponent<IKanbanFormTaskProps> = ({
           <input
             type="text"
             className={styles.modal__input__title}
-            value={taskItem.title}
+            value={HoldTask.title}
             placeholder="Введите новый заголовок"
             onChange={e => changeTitleHandler(e)}
           />
@@ -78,7 +61,7 @@ const KanbanFormTask: React.FunctionComponent<IKanbanFormTaskProps> = ({
           <input
             type="text"
             className={styles.modal__input__description}
-            value={taskItem.description}
+            value={HoldTask.description}
             placeholder="Введите новое описание таски"
             onChange={e => changeDescriptionHandler(e)}
           />
@@ -86,13 +69,13 @@ const KanbanFormTask: React.FunctionComponent<IKanbanFormTaskProps> = ({
 
         <div className={styles.modal__btnWrapper}>
           <button
-            className={idOfExistsTask ? styles.modal__btn_chng : styles.modal__btn_add}
+            className={HoldTask.id ? styles.modal__btn_chng : styles.modal__btn_add}
             onClick={() => taskCreator()}
           >
-            {idOfExistsTask ? 'Изменить' : 'Добавить'}
+            {TicketsState.ticketsList.includes(HoldTask) ? 'Изменить' : 'Добавить'}
           </button>
 
-          {idOfExistsTask ? (
+          {HoldTask.id ? (
             <button className={styles.modal__btn_del} onClick={() => taskRemove()}>
               Удалить
             </button>
