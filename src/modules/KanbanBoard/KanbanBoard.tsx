@@ -16,7 +16,6 @@ const KanbanBoard: React.FunctionComponent<IKanbanBoardProps> = props => {
   const [idOfExistsTask, setIdOfExistsTask] = useState<number | null>(null);
   const [taskItem, setTaskItem] = useState<ITicket>({id: 0, title: '', description: '', type: 'backlog'});
 
-  console.log('<KanbanBoard/> render');
   return (
     <div>
       <div className="kanbanWrapper">

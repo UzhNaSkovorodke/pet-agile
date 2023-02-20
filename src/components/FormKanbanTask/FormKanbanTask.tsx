@@ -2,15 +2,16 @@ import * as React from 'react';
 import {useDispatch} from 'react-redux';
 
 import {addTicket, deleteTicket} from '../../store/TicketsSlice';
+import ITicket from '../../store/interface/ITicket';
 
 import styles from './FormKanbanTask.module.scss';
 
 interface IKanbanFormTaskProps {
-  taskItem: any;
-  setTaskItem: any;
-  setIsActiveModal: any;
-  idOfExistsTask: any;
-  setIdOfExistsTask: any;
+  taskItem: ITicket;
+  setTaskItem: React.Dispatch<React.SetStateAction<ITicket>>;
+  setIsActiveModal: React.Dispatch<React.SetStateAction<boolean>>;
+  idOfExistsTask: number | null;
+  setIdOfExistsTask: React.Dispatch<React.SetStateAction<number | null>>;
 }
 
 const KanbanFormTask: React.FunctionComponent<IKanbanFormTaskProps> = ({
@@ -37,6 +38,17 @@ const KanbanFormTask: React.FunctionComponent<IKanbanFormTaskProps> = ({
     if (idOfExistsTask) {
       dispatch(deleteTicket(idOfExistsTask));
       dispatch(addTicket(taskItem));
+      setIdOfExistsTask(null);
+      setIsActiveModal(false);
+    } else {
+      dispatch(addTicket(taskItem));
+      setIsActiveModal(false);
+    }
+  }
+
+  function taskRemove() {
+    if (idOfExistsTask) {
+      dispatch(deleteTicket(idOfExistsTask));
       setIdOfExistsTask(null);
       setIsActiveModal(false);
     } else {
@@ -71,10 +83,22 @@ const KanbanFormTask: React.FunctionComponent<IKanbanFormTaskProps> = ({
             onChange={e => changeDescriptionHandler(e)}
           />
         </div>
+
         <div className={styles.modal__btnWrapper}>
-          <button className={styles.modal__btn} onClick={() => taskCreator()}>
+          <button
+            className={idOfExistsTask ? styles.modal__btn_chng : styles.modal__btn_add}
+            onClick={() => taskCreator()}
+          >
             {idOfExistsTask ? 'Изменить' : 'Добавить'}
           </button>
+
+          {idOfExistsTask ? (
+            <button className={styles.modal__btn_del} onClick={() => taskRemove()}>
+              Удалить
+            </button>
+          ) : (
+            ''
+          )}
         </div>
       </div>
     </div>

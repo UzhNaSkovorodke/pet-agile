@@ -3,7 +3,7 @@ import * as React from 'react';
 import './Modal.scss';
 
 interface IModalProps {
-  setIsActive: any;
+  setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
   isActive: boolean;
   children?: JSX.Element | JSX.Element[] | string | string[];
 }

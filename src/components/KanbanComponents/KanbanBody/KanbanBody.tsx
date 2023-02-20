@@ -14,7 +14,7 @@ interface IKanbanBodyProps {
 const elementList: string[] = ['backlog', 'process', 'done'];
 const KanbanBody: React.FunctionComponent<IKanbanBodyProps> = ({setTaskItem, setIsActiveModal, setIdOfExistsTask}) => {
   const TicketsState = useSelector((state: RootState) => state.tickets);
-  console.log('<KanbanBody/> render');
+
   return (
     <div className="kanban-body">
       {elementList.map((item: string) => (

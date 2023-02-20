@@ -9,7 +9,7 @@ interface IKanbanElementProps {
   setTaskItem: React.Dispatch<React.SetStateAction<ITicket>>;
   setIdOfExistsTask: React.Dispatch<React.SetStateAction<number | null>>;
   setIsActiveModal: React.Dispatch<React.SetStateAction<boolean>>;
-  TicketsState: any;
+  TicketsState: {name: string; ticketsList: ITicket[]};
   typeOfElement: string;
 }
 
@@ -37,9 +37,9 @@ const KanbanElement: React.FunctionComponent<IKanbanElementProps> = ({
   }
 
   return (
-    <div className={`kanban-body__element element_${typeOfElement}`}>
+    <div className={`kanban-body__element element_${typeOfElement}`} draggable={true}>
       {TicketsState.ticketsList
-        .filter((ticket: any) => ticket.type === `${typeOfElement}`)
+        .filter((ticket: ITicket) => ticket.type === `${typeOfElement}`)
         .map((item: ITicket) => (
           <KanbanTicket modalActiveHandler={modalActiveHandler} item={item} key={Date.now() + Math.random() * 10}>
             <div className="ticket__title">{item.title}</div>
