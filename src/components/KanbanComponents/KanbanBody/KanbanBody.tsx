@@ -8,19 +8,22 @@ import './KanbanBody.scss';
 
 interface IKanbanBodyProps {
   setIsActiveModal: React.Dispatch<React.SetStateAction<boolean>>;
-  setIdOfExistsTask: React.Dispatch<React.SetStateAction<number | null>>;
   setTaskItem: React.Dispatch<React.SetStateAction<ITicket>>;
+  idOfExistsTask: number | null;
 }
+
 const elementList: string[] = ['backlog', 'process', 'done'];
-const KanbanBody: React.FunctionComponent<IKanbanBodyProps> = ({setTaskItem, setIsActiveModal, setIdOfExistsTask}) => {
+const idOfExistsTask: number | null = 0;
+
+const KanbanBody: React.FunctionComponent<IKanbanBodyProps> = ({setTaskItem, setIsActiveModal, idOfExistsTask}) => {
   const TicketsState = useSelector((state: RootState) => state.tickets);
-  console.log('<KanbanBody/> render');
+
   return (
     <div className="kanban-body">
       {elementList.map((item: string) => (
         <KanbanElement
           key={Date.now() + Math.random() * 10}
-          setIdOfExistsTask={setIdOfExistsTask}
+          idOfExistsTask={idOfExistsTask}
           setIsActiveModal={setIsActiveModal}
           setTaskItem={setTaskItem}
           typeOfElement={item}

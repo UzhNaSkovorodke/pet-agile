@@ -7,14 +7,14 @@ import './KanbanElement.scss';
 
 interface IKanbanElementProps {
   setTaskItem: React.Dispatch<React.SetStateAction<ITicket>>;
-  setIdOfExistsTask: React.Dispatch<React.SetStateAction<number | null>>;
+  idOfExistsTask: number | null;
   setIsActiveModal: React.Dispatch<React.SetStateAction<boolean>>;
   TicketsState: any;
   typeOfElement: string;
 }
 
 const KanbanElement: React.FunctionComponent<IKanbanElementProps> = ({
-  setIdOfExistsTask,
+  idOfExistsTask,
   setTaskItem,
   setIsActiveModal,
   TicketsState,
@@ -23,7 +23,7 @@ const KanbanElement: React.FunctionComponent<IKanbanElementProps> = ({
   function modalActiveHandler(item?: ITicket, type?: any) {
     if (item) {
       setTaskItem(item);
-      setIdOfExistsTask(item.id);
+      idOfExistsTask = item.id;
     } else {
       setTaskItem({
         id: Date.now() + Math.random() * 10,
@@ -31,11 +31,10 @@ const KanbanElement: React.FunctionComponent<IKanbanElementProps> = ({
         description: '',
         type: type
       });
-      setIdOfExistsTask(null);
+      idOfExistsTask = null;
     }
     setIsActiveModal(true);
   }
-
   return (
     <div className={`kanban-body__element element_${typeOfElement}`}>
       {TicketsState.ticketsList

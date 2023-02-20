@@ -33,7 +33,6 @@ const KanbanTicket: React.FunctionComponent<IKanbanTicketProps> = ({children, it
     currentTask.type = item.type;
     dispatch(addTicket(currentTask));
   }
-  console.log('<KanbanTicket/> render');
   return (
     <div
       className="ticketWrapper"
