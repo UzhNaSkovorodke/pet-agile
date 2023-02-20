@@ -1,11 +1,17 @@
-import * as React from 'react'
+import * as React from 'react';
 
-import KanbanTemp from '../templates/KanbanTemp'
+import KanbanBoard from '../modules/KanbanBoard/KanbanBoard';
+import Navigation from '../modules/Navigation/Navigation';
 
 interface IKanbanProps {}
 
 const Kanban: React.FunctionComponent<IKanbanProps> = props => {
-  return <KanbanTemp />
-}
+  return (
+    <>
+      <Navigation />
+      <KanbanBoard />
+    </>
+  );
+};
 
-export default Kanban
+export default Kanban;

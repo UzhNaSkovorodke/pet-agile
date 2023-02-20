@@ -1,10 +1,12 @@
 import {configureStore} from '@reduxjs/toolkit';
 
-import TicketsReducer from './TicketsSlice';
+import HoldTaskReducer from './slices/HoldTaskSlice';
+import TicketsReducer from './slices/TicketListSlice';
 
 const store = configureStore({
   reducer: {
-    tickets: TicketsReducer
+    ticketList: TicketsReducer,
+    holdTask: HoldTaskReducer
   }
 });
 export default store;
