@@ -30,7 +30,7 @@
 //комм поменять на ui kit да и вообще разбить всю форму на компоненты из ui
 .modal__btnWrapper {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
 }
 .modal__btn {
   padding: 0.75rem 1.75rem 0.75rem 1.75rem;
@@ -47,23 +47,6 @@
 }
 .modal__btn:hover {
   background: rgb(36, 161, 88);
-}
-
-.modal__btn_del {
-  padding: 0.75rem 1.75rem 0.75rem 1.75rem;
-
-  border-radius: 5px;
-  border: none;
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px;
-  cursor: pointer;
-  background: rgb(235, 34, 54);
-
-  color: white;
-  font-size: 1.2rem;
-  font-weight: 600;
-}
-.modal__btn_del:hover {
-  background: rgb(168, 38, 51);
 }
 
 .modal__exit {

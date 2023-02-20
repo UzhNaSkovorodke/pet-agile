@@ -34,7 +34,6 @@ const KanbanFormTask: React.FunctionComponent<IKanbanFormTaskProps> = ({
   }
 
   function taskCreator() {
-    console.log(idOfExistsTask);
     if (idOfExistsTask) {
       dispatch(deleteTicket(idOfExistsTask));
       dispatch(addTicket(taskItem));
@@ -45,16 +44,6 @@ const KanbanFormTask: React.FunctionComponent<IKanbanFormTaskProps> = ({
       setIsActiveModal(false);
     }
   }
-
-  function taskDelete() {
-    console.log(idOfExistsTask);
-    if (idOfExistsTask) {
-      dispatch(deleteTicket(idOfExistsTask));
-      setIdOfExistsTask(null);
-      setIsActiveModal(false);
-    }
-  }
-
   return (
     <div className={styles.modal}>
       <div className={styles.modalWrapper}>
@@ -85,9 +74,6 @@ const KanbanFormTask: React.FunctionComponent<IKanbanFormTaskProps> = ({
         <div className={styles.modal__btnWrapper}>
           <button className={styles.modal__btn} onClick={() => taskCreator()}>
             {idOfExistsTask ? 'Изменить' : 'Добавить'}
-          </button>
-          <button className={styles.modal__btn_del} onClick={() => taskDelete()}>
-            Удалить
           </button>
         </div>
       </div>

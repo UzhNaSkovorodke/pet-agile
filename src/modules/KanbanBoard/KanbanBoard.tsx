@@ -16,12 +16,17 @@ const KanbanBoard: React.FunctionComponent<IKanbanBoardProps> = props => {
   const [idOfExistsTask, setIdOfExistsTask] = useState<number | null>(null);
   const [taskItem, setTaskItem] = useState<ITicket>({id: 0, title: '', description: '', type: 'backlog'});
 
+  console.log('<KanbanBoard/> render');
   return (
     <div>
       <div className="kanbanWrapper">
         <div className="kanban">
           <KanbanHeader />
-          <KanbanBody setIsActiveModal={setIsActiveModal} setTaskItem={setTaskItem} idOfExistsTask={idOfExistsTask} />
+          <KanbanBody
+            setIsActiveModal={setIsActiveModal}
+            setTaskItem={setTaskItem}
+            setIdOfExistsTask={setIdOfExistsTask}
+          />
           <Modal isActive={isActiveModal} setIsActive={setIsActiveModal}>
             <FormKanbanTask
               setTaskItem={setTaskItem}
