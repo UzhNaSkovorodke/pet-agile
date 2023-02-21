@@ -4,10 +4,6 @@
   width: 40%;
   height: 6.5rem;
   cursor: pointer;
-
-  color: black;
-  font-weight: 600;
-  font-size: 1.2rem;
 }
 
 .ticketWrapper:hover {
@@ -15,13 +11,11 @@
 }
 
 .ticket__title {
-  color: black;
   font-weight: 600;
-  font-size: 1rem;
+  word-wrap: break-word;
 }
 
 .ticket__description {
-  color: black;
   font-weight: 400;
-  font-size: 0.9rem;
+  word-wrap: break-word;
 }

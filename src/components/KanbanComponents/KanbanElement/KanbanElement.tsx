@@ -36,8 +36,8 @@ const KanbanElement: React.FunctionComponent<IKanbanElementProps> = ({
         .filter((ticket: ITicket) => ticket.type === `${typeOfElement}`)
         .map((item: ITicket) => (
           <KanbanTicket modalActiveHandler={modalActiveHandler} item={item} key={Date.now() + Math.random() * 10}>
-            <div className="ticket__title">{item.title}</div>
-            <div className="ticket__description">{item.description}</div>
+            <h2 className="ticket__title">{item.title}</h2>
+            <p className="ticket__description">{item.description}</p>
           </KanbanTicket>
         ))}
 

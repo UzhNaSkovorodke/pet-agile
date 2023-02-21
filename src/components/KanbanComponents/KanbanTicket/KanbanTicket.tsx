@@ -24,6 +24,7 @@ const KanbanTicket: React.FunctionComponent<IKanbanTicketProps> = ({children, mo
   function dragLeaveHandler(e: any) {
     e.target.style.background = '';
   }
+
   function dragOverHandler(e: any) {
     e.preventDefault();
     e.target.style.background = 'rgb(233, 233, 233)';

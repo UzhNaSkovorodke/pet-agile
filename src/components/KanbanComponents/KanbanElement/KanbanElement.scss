@@ -1,38 +1,33 @@
 .kanban-body__element {
   border-radius: 5px;
-  font-size: 1rem;
-
   width: 33%;
   display: flex;
   flex-wrap: wrap;
   align-content: start;
+
+  .ticketWrapper {
+    border: solid 2px #dfdddd;
+  }
 }
 
 .element_backlog {
   .ticketWrapper {
     border-left: solid 4px #cc2b3d;
-    border-top: solid 2px #dfdddd;
-    border-right: solid 2px #dfdddd;
-    border-bottom: solid 2px #dfdddd;
-  }
-}
-.element_process {
-  .ticketWrapper {
-    border-left: solid 4px #009ccc;
-    border-top: solid 2px #dfdddd;
-    border-right: solid 2px #dfdddd;
-    border-bottom: solid 2px #dfdddd;
-  }
-}
-.element_done {
-  .ticketWrapper {
-    border-left: solid 4px #00cc2c;
-    border-top: solid 2px #dfdddd;
-    border-right: solid 2px #dfdddd;
-    border-bottom: solid 2px #dfdddd;
   }
 }
 
+.element_process {
+  .ticketWrapper {
+    border-left: solid 4px #009ccc;
+  }
+}
+
+.element_done {
+  .ticketWrapper {
+    border-left: solid 4px #00cc2c;
+  }
+}
+//комм кнопка ад
 .button_add {
   margin: 0.5rem;
   width: 45%;

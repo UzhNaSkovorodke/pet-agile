@@ -4,6 +4,8 @@ import {useDispatch, useSelector} from 'react-redux';
 import {setHoldTask} from '../../store/slices/HoldTaskSlice';
 import {addTicket, deleteTicket} from '../../store/slices/TicketListSlice';
 import {RootState} from '../../store/store';
+import BtnDanger from '../../ui/buttons/danger/BtnDanger';
+import BtnPrimary from '../../ui/buttons/primary/BtnPrimary';
 
 import styles from './FormKanbanTask.module.scss';
 
@@ -43,8 +45,11 @@ const KanbanFormTask: React.FunctionComponent<IKanbanFormTaskProps> = ({setIsAct
     <div className={styles.modal}>
       <div className={styles.modalWrapper}>
         <div className={styles.modal__exit}>
-          <button onClick={() => setIsActiveModal(false)}>X</button>
+          <BtnDanger fontSize="h1" buttonHandleFunc={() => setIsActiveModal(false)}>
+            X
+          </BtnDanger>
         </div>
+
         <div className={styles.modal__input__wrapper}>
           <p>Название задачи</p>
           <input
@@ -68,20 +73,17 @@ const KanbanFormTask: React.FunctionComponent<IKanbanFormTaskProps> = ({setIsAct
         </div>
 
         <div className={styles.modal__btnWrapper}>
-          <button
-            className={HoldTask.id ? styles.modal__btn_chng : styles.modal__btn_add}
-            onClick={() => taskCreator()}
-          >
-            {TicketsState.ticketsList.includes(HoldTask) ? 'Изменить' : 'Добавить'}
-          </button>
-
           {HoldTask.id ? (
-            <button className={styles.modal__btn_del} onClick={() => taskRemove()}>
+            <BtnPrimary fontSize="h1" buttonHandleFunc={() => taskRemove()}>
               Удалить
-            </button>
+            </BtnPrimary>
           ) : (
             ''
           )}
+
+          <BtnPrimary fontSize="h1" buttonHandleFunc={() => taskCreator()}>
+            {TicketsState.ticketsList.includes(HoldTask) ? 'Изменить' : 'Добавить'}
+          </BtnPrimary>
         </div>
       </div>
     </div>
