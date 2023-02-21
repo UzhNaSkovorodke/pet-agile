@@ -24,8 +24,10 @@ const KanbanTicket: React.FunctionComponent<IKanbanTicketProps> = ({children, mo
   function dragLeaveHandler(e: any) {
     e.target.style.background = '';
   }
+
   function dragOverHandler(e: any) {
     e.preventDefault();
+
     e.target.style.background = 'rgb(233, 233, 233)';
   }
 
@@ -41,7 +43,7 @@ const KanbanTicket: React.FunctionComponent<IKanbanTicketProps> = ({children, mo
       className="ticketWrapper"
       draggable={true}
       onClick={() => modalActiveHandler(item)}
-      onDragStart={e => dragStartHandler()}
+      onDragStart={dragStartHandler}
       onDragLeave={e => dragLeaveHandler(e)}
       onDragOver={e => dragOverHandler(e)}
       onDrop={e => dropHandler(e)}

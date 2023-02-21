@@ -4,6 +4,9 @@ import {useDispatch, useSelector} from 'react-redux';
 import {setHoldTask} from '../../store/slices/HoldTaskSlice';
 import {addTicket, deleteTicket} from '../../store/slices/TicketListSlice';
 import {RootState} from '../../store/store';
+import BtnDanger from '../../ui/buttons/danger/BtnDanger';
+import BtnPrimary from '../../ui/buttons/primary/BtnPrimary';
+import InputCommon from '../../ui/input/common/InputCommon';
 
 import styles from './FormKanbanTask.module.scss';
 
@@ -16,12 +19,12 @@ const KanbanFormTask: React.FunctionComponent<IKanbanFormTaskProps> = ({setIsAct
   const HoldTask = useSelector((state: RootState) => state.holdTask.holdTask);
   const TicketsState = useSelector((state: RootState) => state.ticketList);
 
-  function changeTitleHandler(event: any) {
+  function changeTitleHandler(event: React.ChangeEvent<HTMLInputElement>) {
     const taskItemObj = {...HoldTask};
     taskItemObj.title = event.target.value;
     dispatch(setHoldTask(taskItemObj));
   }
-  function changeDescriptionHandler(event: any) {
+  function changeDescriptionHandler(event: React.ChangeEvent<HTMLInputElement>) {
     const taskItemObj = {...HoldTask};
     taskItemObj.description = event.target.value;
     dispatch(setHoldTask(taskItemObj));
@@ -43,45 +46,43 @@ const KanbanFormTask: React.FunctionComponent<IKanbanFormTaskProps> = ({setIsAct
     <div className={styles.modal}>
       <div className={styles.modalWrapper}>
         <div className={styles.modal__exit}>
-          <button onClick={() => setIsActiveModal(false)}>X</button>
+          <BtnDanger fontSize="h1" buttonHandleFunc={() => setIsActiveModal(false)}>
+            X
+          </BtnDanger>
         </div>
+
+        <p>Название задачи</p>
         <div className={styles.modal__input__wrapper}>
-          <p>Название задачи</p>
-          <input
-            type="text"
-            className={styles.modal__input__title}
+          <InputCommon
+            placeholder="Введите заголовок"
             value={HoldTask.title}
-            placeholder="Введите новый заголовок"
             onChange={e => changeTitleHandler(e)}
+            fontSize="h0"
           />
         </div>
 
+        <p>Описание</p>
         <div className={styles.modal__input__wrapper}>
-          <p>Описание</p>
-          <input
-            type="text"
-            className={styles.modal__input__description}
+          <InputCommon
+            placeholder="Введите новое описание"
             value={HoldTask.description}
-            placeholder="Введите новое описание таски"
             onChange={e => changeDescriptionHandler(e)}
+            fontSize="h0"
           />
         </div>
 
         <div className={styles.modal__btnWrapper}>
-          <button
-            className={HoldTask.id ? styles.modal__btn_chng : styles.modal__btn_add}
-            onClick={() => taskCreator()}
-          >
-            {TicketsState.ticketsList.includes(HoldTask) ? 'Изменить' : 'Добавить'}
-          </button>
-
           {HoldTask.id ? (
-            <button className={styles.modal__btn_del} onClick={() => taskRemove()}>
+            <BtnDanger fontSize="h1" buttonHandleFunc={() => taskRemove()}>
               Удалить
-            </button>
+            </BtnDanger>
           ) : (
             ''
           )}
+
+          <BtnPrimary fontSize="h1" buttonHandleFunc={() => taskCreator()}>
+            {TicketsState.ticketsList.includes(HoldTask) ? 'Изменить' : 'Добавить'}
+          </BtnPrimary>
         </div>
       </div>
     </div>

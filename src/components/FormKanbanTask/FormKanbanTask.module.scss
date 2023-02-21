@@ -6,101 +6,26 @@
 }
 .modalWrapper {
   width: 90%;
+
+  p {
+    font-size: 1rem;
+    color: grey;
+    font-weight: 600;
+  }
 }
-.modal__input__wrapper {
-  color: rgb(141, 141, 141);
-  font-weight: 600;
-}
-.modal__input__title {
-  width: 95%;
-  font-size: 2rem;
-  border: solid 2px #dfdddd;
-  border-radius: 10px;
-  padding: 0.75rem;
-  margin-bottom: 2rem;
-}
-.modal__input__description {
-  width: 95%;
-  font-size: 1.5rem;
-  border: solid 2px #dfdddd;
-  border-radius: 10px;
-  padding: 0.75rem;
-  margin-bottom: 4rem;
-}
-//комм поменять на ui kit да и вообще разбить всю форму на компоненты из ui
 .modal__btnWrapper {
   display: flex;
   justify-content: space-evenly;
 }
+.modal__input__wrapper {
+  display: flex;
+  justify-content: center;
+  width: 90%;
+}
 .modal__exit {
-  margin-bottom: 2rem;
   display: flex;
   justify-content: right;
   button {
     padding: 0.5rem 0.75rem;
-
-    border-radius: 5px;
-    border: none;
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px;
-    cursor: pointer;
-    background: rgb(235, 34, 54);
-
-    color: white;
-    font-size: 1.2rem;
-    font-weight: 600;
   }
-  button:hover {
-    background: rgb(168, 38, 51);
-  }
-}
-
-.modal__btn_chng {
-  padding: 0.75rem 1.75rem 0.75rem 1.75rem;
-
-  border-radius: 5px;
-  border: none;
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px;
-  cursor: pointer;
-  background: #1abc9c;
-
-  color: white;
-  font-size: 1.2rem;
-  font-weight: 600;
-}
-.modal__btn_chng:hover {
-  background: #16997f;
-}
-
-.modal__btn_add {
-  padding: 0.75rem 1.75rem 0.75rem 1.75rem;
-
-  border-radius: 5px;
-  border: none;
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px;
-  cursor: pointer;
-  background: rgb(46, 204, 113);
-
-  color: white;
-  font-size: 1.2rem;
-  font-weight: 600;
-}
-.modal__btn_add:hover {
-  background: rgb(36, 161, 88);
-}
-
-.modal__btn_del {
-  padding: 0.75rem 1.75rem 0.75rem 1.75rem;
-
-  border-radius: 5px;
-  border: none;
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px;
-  cursor: pointer;
-  background: rgb(235, 34, 54);
-
-  color: white;
-  font-size: 1.2rem;
-  font-weight: 600;
-}
-.modal__btn_del:hover {
-  background: rgb(168, 38, 51);
 }

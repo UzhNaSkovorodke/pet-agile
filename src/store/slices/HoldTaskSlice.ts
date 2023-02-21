@@ -6,7 +6,6 @@ import ITicket from '../interface/ITicket';
 export interface TicketState {
   name: string;
   holdTask: ITicket;
-  isHoldingTask: boolean;
 }
 
 const initialState: TicketState = {
@@ -17,7 +16,6 @@ const initialState: TicketState = {
     description: 'Здесь должна быть таска с которой работам',
     type: 'backlog'
   },
-  isHoldingTask: false
 };
 
 export const holdTaskSlice = createSlice({
@@ -30,11 +28,8 @@ export const holdTaskSlice = createSlice({
     setIdHoldTask: (state, action: PayloadAction<number>) => {
       state.holdTask.id = action.payload;
     },
-    isHoldingTask: (state, action: PayloadAction<boolean>) => {
-      state.isHoldingTask = action.payload;
-    }
   }
 });
-export const {setHoldTask, setIdHoldTask, isHoldingTask} = holdTaskSlice.actions;
+export const {setHoldTask, setIdHoldTask} = holdTaskSlice.actions;
 
 export default holdTaskSlice.reducer;

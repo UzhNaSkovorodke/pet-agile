@@ -1,17 +1,14 @@
-import * as React from 'react'
+import * as React from 'react';
 
-import '../Btn.scss'
-import { IButton } from '../InterfaceButton'
+import '../Btn.scss';
+import {IButton} from '../InterfaceButton';
 
-const BtnDisabled: React.FunctionComponent<IButton> = ({
-	children,
-	handleFunction
-}) => {
-	return (
-		<button type="button" onClick={handleFunction} className="btn disabled">
-			{children}
-		</button>
-	)
-}
+const BtnDisabled: React.FunctionComponent<IButton> = ({children, fontSize, buttonHandleFunc}) => {
+  return (
+    <button type="button" className={`btn disabled ${fontSize}`} onClick={buttonHandleFunc}>
+      {children}
+    </button>
+  );
+};
 
-export default BtnDisabled
+export default BtnDisabled;

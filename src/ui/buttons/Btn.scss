@@ -1,51 +1,47 @@
 .btn {
-	padding: 0.75rem 1.75rem 0.75rem 1.75rem;
-	border-radius: 5px;
-	border: none;
-	box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px;
-	margin: 1rem;
-	cursor: pointer;
+  padding: 0.75rem 1.75rem 0.75rem 1.75rem;
+  border-radius: 5px;
+  border: none;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px;
+  margin: 1rem;
+  cursor: pointer;
 
-	color: white;
-	font-size: 0.75rem;
-	font-weight: 600;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
 }
 
 .danger {
-	background: rgb(220, 53, 69);
+  background: rgb(220, 53, 69);
 }
 .danger:hover {
-	background: rgb(168, 38, 51);
+  background: rgb(168, 38, 51);
 }
 
 .success {
-	background: rgb(46, 204, 113);
+  background: rgb(46, 204, 113);
 }
 .success:hover {
-	background: rgb(36, 161, 88);
-}
-
-.default {
-	background: rgb(189, 195, 199);
-}
-.default:hover {
-	background: rgb(147, 152, 155);
+  background: rgb(36, 161, 88);
 }
 
 .disabled {
-	background: #d1d5d8;
+  background: #d1d5d8;
 }
 
 .primary {
-	background: #1abc9c;
+  background: #1abc9c;
 }
 .primary:hover {
-	background: #16997f;
+  background: #16997f;
 }
 
-.info {
-	background: #17a2b8;
+.h1 {
+  font-size: 1.2rem;
 }
-.info:hover {
-	background: #128091;
+.h2 {
+  font-size: 1rem;
+}
+.p {
+  font-size: 0.9rem;
 }
