@@ -6,6 +6,7 @@ import {addTicket, deleteTicket} from '../../store/slices/TicketListSlice';
 import {RootState} from '../../store/store';
 import BtnDanger from '../../ui/buttons/danger/BtnDanger';
 import BtnPrimary from '../../ui/buttons/primary/BtnPrimary';
+import InputCommon from '../../ui/input/common/InputCommon';
 
 import styles from './FormKanbanTask.module.scss';
 
@@ -18,12 +19,12 @@ const KanbanFormTask: React.FunctionComponent<IKanbanFormTaskProps> = ({setIsAct
   const HoldTask = useSelector((state: RootState) => state.holdTask.holdTask);
   const TicketsState = useSelector((state: RootState) => state.ticketList);
 
-  function changeTitleHandler(event: any) {
+  function changeTitleHandler(event: React.ChangeEvent<HTMLInputElement>) {
     const taskItemObj = {...HoldTask};
     taskItemObj.title = event.target.value;
     dispatch(setHoldTask(taskItemObj));
   }
-  function changeDescriptionHandler(event: any) {
+  function changeDescriptionHandler(event: React.ChangeEvent<HTMLInputElement>) {
     const taskItemObj = {...HoldTask};
     taskItemObj.description = event.target.value;
     dispatch(setHoldTask(taskItemObj));
@@ -50,33 +51,31 @@ const KanbanFormTask: React.FunctionComponent<IKanbanFormTaskProps> = ({setIsAct
           </BtnDanger>
         </div>
 
+        <p>Название задачи</p>
         <div className={styles.modal__input__wrapper}>
-          <p>Название задачи</p>
-          <input
-            type="text"
-            className={styles.modal__input__title}
+          <InputCommon
+            placeholder="Введите заголовок"
             value={HoldTask.title}
-            placeholder="Введите новый заголовок"
             onChange={e => changeTitleHandler(e)}
+            fontSize="h0"
           />
         </div>
 
+        <p>Описание</p>
         <div className={styles.modal__input__wrapper}>
-          <p>Описание</p>
-          <input
-            type="text"
-            className={styles.modal__input__description}
+          <InputCommon
+            placeholder="Введите новое описание"
             value={HoldTask.description}
-            placeholder="Введите новое описание таски"
             onChange={e => changeDescriptionHandler(e)}
+            fontSize="h0"
           />
         </div>
 
         <div className={styles.modal__btnWrapper}>
           {HoldTask.id ? (
-            <BtnPrimary fontSize="h1" buttonHandleFunc={() => taskRemove()}>
+            <BtnDanger fontSize="h1" buttonHandleFunc={() => taskRemove()}>
               Удалить
-            </BtnPrimary>
+            </BtnDanger>
           ) : (
             ''
           )}

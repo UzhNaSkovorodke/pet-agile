@@ -6,30 +6,21 @@
 }
 .modalWrapper {
   width: 90%;
-}
-.modal__input__wrapper {
-  color: rgb(141, 141, 141);
-}
-.modal__input__title {
-  width: 95%;
-  font-size: 2rem;
-  border: solid 2px #dfdddd;
-  border-radius: 10px;
-  padding: 0.75rem;
-  margin-bottom: 2rem;
-}
-.modal__input__description {
-  width: 95%;
-  font-size: 1.5rem;
-  border: solid 2px #dfdddd;
-  border-radius: 10px;
-  padding: 0.75rem;
-  margin-bottom: 4rem;
-}
 
+  p {
+    font-size: 1rem;
+    color: grey;
+    font-weight: 600;
+  }
+}
 .modal__btnWrapper {
   display: flex;
   justify-content: space-evenly;
+}
+.modal__input__wrapper {
+  display: flex;
+  justify-content: center;
+  width: 90%;
 }
 .modal__exit {
   display: flex;
