@@ -1,13 +1,11 @@
 .kanban-body__element {
   border-radius: 5px;
-  width: 33%;
+  width: 33.2%;
   display: flex;
   flex-wrap: wrap;
   align-content: start;
 
-  .ticketWrapper {
-    border: solid 2px #dfdddd;
-  }
+  position: relative;
 }
 
 .element_backlog {

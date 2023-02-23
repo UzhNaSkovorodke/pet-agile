@@ -72,12 +72,10 @@ const KanbanFormTask: React.FunctionComponent<IKanbanFormTaskProps> = ({setIsAct
         </div>
 
         <div className={styles.modal__btnWrapper}>
-          {HoldTask.id ? (
+          {HoldTask.id && (
             <BtnDanger fontSize="h1" buttonHandleFunc={() => taskRemove()}>
               Удалить
             </BtnDanger>
-          ) : (
-            ''
           )}
 
           <BtnPrimary fontSize="h1" buttonHandleFunc={() => taskCreator()}>
