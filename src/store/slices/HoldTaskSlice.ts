@@ -15,7 +15,7 @@ const initialState: TicketState = {
     title: 'Здесь должна быть таска с которой работам',
     description: 'Здесь должна быть таска с которой работам',
     type: 'backlog'
-  },
+  }
 };
 
 export const holdTaskSlice = createSlice({
@@ -27,7 +27,7 @@ export const holdTaskSlice = createSlice({
     },
     setIdHoldTask: (state, action: PayloadAction<number>) => {
       state.holdTask.id = action.payload;
-    },
+    }
   }
 });
 export const {setHoldTask, setIdHoldTask} = holdTaskSlice.actions;

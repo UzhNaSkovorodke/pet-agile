@@ -11,7 +11,6 @@ interface IKanbanTicketProps {
   children?: JSX.Element | JSX.Element[] | string | string[];
   item: ITicket;
 }
-
 let currentTask: ITicket = {id: 0, title: '', description: '', type: ''};
 
 const KanbanTicket: React.FunctionComponent<IKanbanTicketProps> = ({children, modalActiveHandler, item}) => {
@@ -21,17 +20,11 @@ const KanbanTicket: React.FunctionComponent<IKanbanTicketProps> = ({children, mo
     currentTask = {...item};
   }
 
-  function dragLeaveHandler(e: any) {
-    e.target.style.background = '';
-  }
-
-  function dragOverHandler(e: any) {
+  function dragOverHandler(e: React.DragEvent<HTMLDivElement>) {
     e.preventDefault();
-
-    e.target.style.background = 'rgb(233, 233, 233)';
   }
 
-  function dropHandler(e: React.FormEvent<HTMLDivElement>) {
+  function dropHandler(e: React.DragEvent<HTMLDivElement>) {
     e.preventDefault();
     dispatch(deleteTicket(currentTask.id));
     currentTask.type = item.type;
@@ -44,7 +37,6 @@ const KanbanTicket: React.FunctionComponent<IKanbanTicketProps> = ({children, mo
       draggable={true}
       onClick={() => modalActiveHandler(item)}
       onDragStart={dragStartHandler}
-      onDragLeave={e => dragLeaveHandler(e)}
       onDragOver={e => dragOverHandler(e)}
       onDrop={e => dropHandler(e)}
     >
