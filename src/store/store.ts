@@ -5,7 +5,7 @@ import TicketsReducer from './slices/TicketListSlice';
 
 const store = configureStore({
   reducer: {
-    ticketList: TicketsReducer,
+    ticketState: TicketsReducer,
     holdTask: HoldTaskReducer
   }
 });
