@@ -11,7 +11,7 @@ interface IKanbanTicketProps {
   modalActiveHandler: (item: ITicket) => void;
   item: ITicket;
 }
-let currentTask: ITicket = {id: 0, title: '', description: '', type: ''};
+let currentTask: ITicket = {id: 0, title: '', description: '', type: '', tags: []};
 
 const KanbanTicket: React.FunctionComponent<IKanbanTicketProps> = ({modalActiveHandler, item}) => {
   const dispatch = useDispatch();
@@ -43,6 +43,15 @@ const KanbanTicket: React.FunctionComponent<IKanbanTicketProps> = ({modalActiveH
       <div className="ticket">
         <h2 className="ticket__title">{item.title}</h2>
         <p className="ticket__description">{item.description}</p>
+
+        <div className="ticket__tags">
+          {item.tags.map((item: string) => (
+            <div key={Date.now() * Math.random()} className="tag">
+              {item}
+            </div>
+          ))}
+        </div>
+
         <div className="ticket__avatarWrapper">
           <img draggable={false} src={icon1} className="ticket__avatar ticket__" />
           <p>Кирилл Дженкинс</p>

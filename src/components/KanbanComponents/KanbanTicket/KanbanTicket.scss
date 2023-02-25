@@ -1,10 +1,12 @@
 .ticketWrapper {
   margin: 0.8rem;
   padding: 0.5rem;
+
   cursor: pointer;
   border: solid 2px #dfdddd;
   background: white;
-  border-radius: 15px;
+  border-radius: 10px;
+  overflow: hidden;
 }
 .ticketWrapper:hover {
   background: rgb(233, 233, 233);
@@ -14,28 +16,51 @@
 .ticket {
   .ticket__title {
     word-wrap: break-word;
-    font-weight: 600;
+    font-weight: 700;
+    font-size: 0.9rem;
     margin-bottom: 0.5rem;
+    margin-top: 1rem;
   }
   .ticket__description {
     word-wrap: break-word;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    max-height: 70px;
+    font-size: 0.9rem;
+    overflow: hidden;
   }
-}
-.ticket__avatarWrapper {
-  width: 80%;
-  margin: 0.5rem 0.2rem;
-  display: flex;
-  justify-content: start;
-  align-items: center;
-  p {
+
+  .ticket__avatarWrapper {
+    width: 80%;
+    margin: 0rem 0.5rem 0.5rem 0.5rem;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    p {
+      font-weight: 600;
+    }
+  }
+  .ticket__avatar {
+    background-color: #8ed1ee;
+    border-radius: 100px;
+    object-fit: contain;
+    width: 17%;
+    margin-right: 1rem;
+  }
+
+  .ticket__tags {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .tag {
+    display: flex;
+    align-items: center;
+    margin-right: 0.5rem;
+    padding: 0.4rem 1rem;
+    font-size: 0.7rem;
+    color: white;
     font-weight: 600;
+    border-radius: 15px;
+    background: #3a72eb;
   }
-}
-.ticket__avatar {
-  background-color: #8ed1ee;
-  border-radius: 100px;
-  object-fit: contain;
-  width: 17%;
-  margin-right: 1rem;
 }

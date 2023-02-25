@@ -14,9 +14,23 @@ function idCreator() {
 const initialState: TicketState = {
   name: 'ticketList',
   ticketsList: [
-    {id: idCreator(), title: 'Сделать систему', description: 'Делаю систему авторизации', type: 'backlog'},
-    {id: idCreator(), title: 'Делаю систему', description: 'Делаю систему авторизации', type: 'process'},
-    {id: idCreator(), title: 'Сделал систему', description: 'Делаю систему авторизации', type: 'done'}
+    {
+      id: idCreator(),
+      title: 'Сделать систему авторизации',
+      description:
+        'Установить node js, написать rest api, а потом сделать jwt авторизацию через jwt токены. Авторизация через сессии не канает...',
+      type: 'backlog',
+      tags: ['Backend', 'Node']
+    },
+    {
+      id: idCreator(),
+      title: 'Делаю ревью',
+      description:
+        'Тут сами знаете какой джун обнаружил конфликты, когда пытался закоммитить последний багфикс. Он попросил помочь ему с этим и глянуть что да как',
+      type: 'process',
+      tags: ['Codereview', 'Develop']
+    },
+    {id: idCreator(), title: 'Сделал систему', description: 'Делаю систему авторизации', type: 'done', tags: ['product', 'develop']}
   ]
 };
 export const ticketLisSlice = createSlice({

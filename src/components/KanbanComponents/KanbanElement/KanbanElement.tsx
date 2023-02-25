@@ -24,7 +24,7 @@ const KanbanElement: React.FunctionComponent<IKanbanElementProps> = ({setIsActiv
       dispatch(setHoldTask(item));
       dispatch(setIdHoldTask(item.id));
     } else {
-      dispatch(setHoldTask({id: idCreator(), title: '', description: '', type: type}));
+      dispatch(setHoldTask({id: idCreator(), title: '', description: '', type: type, tags: []}));
     }
     setIsActiveModal(true);
   }
@@ -32,7 +32,9 @@ const KanbanElement: React.FunctionComponent<IKanbanElementProps> = ({setIsActiv
   return (
     <div className={`kanban-body__element element_${typeOfElement}`}>
       <div className="body__element_title">
-        <p>{typeOfElement === 'backlog' ? 'Сделать' : typeOfElement === 'process' ? 'В процессе' : 'Сделано'}</p>
+        <p className="__element_title">
+          {typeOfElement === 'backlog' ? 'Сделать' : typeOfElement === 'process' ? 'В процессе' : 'Сделано'}
+        </p>
       </div>
       <div className="elementsWrapper">
         {TicketsState.ticketsList
