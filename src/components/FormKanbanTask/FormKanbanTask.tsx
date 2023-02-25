@@ -53,12 +53,7 @@ const KanbanFormTask: React.FunctionComponent<IKanbanFormTaskProps> = ({setIsAct
 
         <p>Название задачи</p>
         <div className={styles.modal__input__wrapper}>
-          <InputCommon
-            placeholder="Введите заголовок"
-            value={HoldTask.title}
-            onChange={e => changeTitleHandler(e)}
-            fontSize="h0"
-          />
+          <InputCommon placeholder="Введите заголовок" value={HoldTask.title} onChange={e => changeTitleHandler(e)} fontSize="h0" />
         </div>
 
         <p>Описание</p>

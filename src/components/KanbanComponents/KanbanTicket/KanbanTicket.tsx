@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {useDispatch} from 'react-redux';
 
+import icon1 from '../../../assets/icon/user1.png';
 import ITicket from '../../../store/interface/ITicket';
 import {addTicket, deleteTicket} from '../../../store/slices/TicketListSlice';
 
@@ -8,12 +9,11 @@ import './KanbanTicket.scss';
 
 interface IKanbanTicketProps {
   modalActiveHandler: (item: ITicket) => void;
-  children?: JSX.Element | JSX.Element[] | string | string[];
   item: ITicket;
 }
 let currentTask: ITicket = {id: 0, title: '', description: '', type: ''};
 
-const KanbanTicket: React.FunctionComponent<IKanbanTicketProps> = ({children, modalActiveHandler, item}) => {
+const KanbanTicket: React.FunctionComponent<IKanbanTicketProps> = ({modalActiveHandler, item}) => {
   const dispatch = useDispatch();
 
   function dragStartHandler() {
@@ -40,7 +40,14 @@ const KanbanTicket: React.FunctionComponent<IKanbanTicketProps> = ({children, mo
       onDragOver={e => dragOverHandler(e)}
       onDrop={e => dropHandler(e)}
     >
-      {children}
+      <div className="ticket">
+        <h2 className="ticket__title">{item.title}</h2>
+        <p className="ticket__description">{item.description}</p>
+        <div className="ticket__avatarWrapper">
+          <img draggable={false} src={icon1} className="ticket__avatar ticket__" />
+          <p>Кирилл Дженкинс</p>
+        </div>
+      </div>
     </div>
   );
 };

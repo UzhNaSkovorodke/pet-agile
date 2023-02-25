@@ -2,7 +2,7 @@ import * as React from 'react';
 import {useState} from 'react';
 
 import FormKanbanTask from '../../components/FormKanbanTask/FormKanbanTask';
-import {KanbanBody, KanbanHeader} from '../../components/KanbanComponents';
+import {KanbanBody} from '../../components/KanbanComponents';
 import Modal from '../../components/Modal/Modal';
 
 import './KanbanBoard.scss';
@@ -16,7 +16,6 @@ const KanbanBoard: React.FunctionComponent<IKanbanBoardProps> = props => {
     <div>
       <div className="kanbanWrapper">
         <div className="kanban">
-          <KanbanHeader />
           <KanbanBody setIsActiveModal={setIsActiveModal} />
           <Modal isActive={isActiveModal} setIsActive={setIsActiveModal}>
             <FormKanbanTask setIsActiveModal={setIsActiveModal} />

@@ -7,13 +7,16 @@ export interface TicketState {
   name: string;
   ticketsList: Array<ITicket>;
 }
+function idCreator() {
+  return Date.now() + Math.random() * 2;
+}
 
 const initialState: TicketState = {
   name: 'ticketList',
   ticketsList: [
-    {id: 1, title: 'Сделать систему', description: 'Делаю систему авторизации', type: 'backlog'},
-    {id: 2, title: 'Делаю систему', description: 'Делаю систему авторизации', type: 'process'},
-    {id: 3, title: 'Сделал систему', description: 'Делаю систему авторизации', type: 'done'}
+    {id: idCreator(), title: 'Сделать систему', description: 'Делаю систему авторизации', type: 'backlog'},
+    {id: idCreator(), title: 'Делаю систему', description: 'Делаю систему авторизации', type: 'process'},
+    {id: idCreator(), title: 'Сделал систему', description: 'Делаю систему авторизации', type: 'done'}
   ]
 };
 export const ticketLisSlice = createSlice({
