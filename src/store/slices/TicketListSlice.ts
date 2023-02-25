@@ -18,7 +18,7 @@ const initialState: TicketState = {
   ticketList: [
     {
       id: idCreator(),
-      title: 'backlog',
+      title: 'Сделать',
       items: [
         {
           id: idCreator(),
@@ -30,12 +30,12 @@ const initialState: TicketState = {
     },
     {
       id: idCreator(),
-      title: 'process',
+      title: 'В прогрессе',
       items: [{id: idCreator(), title: 'Делаю систему', description: 'Делаю систему авторизации', type: 'process'}]
     },
     {
       id: idCreator(),
-      title: 'done',
+      title: 'Сделано',
       items: [{id: idCreator(), title: 'Сделал систему', description: 'Делаю систему авторизации', type: 'done'}]
     }
   ]

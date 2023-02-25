@@ -32,14 +32,19 @@ const KanbanElement: React.FunctionComponent<IKanbanElementProps> = ({setIsActiv
 
   return (
     <div className={`kanban-body__element element_${typeOfElement}`}>
-      {ticketList.map((item: any) => (
-        <KanbanTicket modalActiveHandler={modalActiveHandler} item={item} key={idCreator()}></KanbanTicket>
-      ))}
+      <div className="body__element_title">
+        <p>{typeOfElement}</p>
+      </div>
+      <div className="elementsWrapper">
+        {ticketList.map((item: any) => (
+          <KanbanTicket modalActiveHandler={modalActiveHandler} item={item} key={idCreator()}></KanbanTicket>
+        ))}
 
-      <div className="btn_wrapper">
-        <button onClick={() => modalActiveHandler(undefined, `${typeOfElement}`)} className="button_add">
-          +
-        </button>
+        <div className="btn_wrapper">
+          <button onClick={() => modalActiveHandler(undefined, `${typeOfElement}`)} className="button_add">
+            +
+          </button>
+        </div>
       </div>
     </div>
   );

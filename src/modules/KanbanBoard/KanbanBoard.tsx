@@ -16,7 +16,6 @@ const KanbanBoard: React.FunctionComponent<IKanbanBoardProps> = props => {
     <div>
       <div className="kanbanWrapper">
         <div className="kanban">
-          <KanbanHeader />
           <KanbanBody setIsActiveModal={setIsActiveModal} />
           <Modal isActive={isActiveModal} setIsActive={setIsActiveModal}>
             <FormKanbanTask setIsActiveModal={setIsActiveModal} />
