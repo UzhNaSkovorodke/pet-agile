@@ -9,13 +9,12 @@ import './KanbanElement.scss';
 
 interface IKanbanElementProps {
   setIsActiveModal: React.Dispatch<React.SetStateAction<boolean>>;
-  ticketList: ITicket[];
+  TicketsState: {name: string; ticketsList: ITicket[]};
   typeOfElement: string;
 }
 
-const KanbanElement: React.FunctionComponent<IKanbanElementProps> = ({setIsActiveModal, typeOfElement, ticketList}) => {
+const KanbanElement: React.FunctionComponent<IKanbanElementProps> = ({setIsActiveModal, TicketsState, typeOfElement}) => {
   const dispatch = useDispatch();
-
   function idCreator() {
     return Date.now() + Math.random() * 2;
   }
@@ -32,14 +31,20 @@ const KanbanElement: React.FunctionComponent<IKanbanElementProps> = ({setIsActiv
 
   return (
     <div className={`kanban-body__element element_${typeOfElement}`}>
-      {ticketList.map((item: any) => (
-        <KanbanTicket modalActiveHandler={modalActiveHandler} item={item} key={idCreator()}></KanbanTicket>
-      ))}
-
-      <div className="btn_wrapper">
-        <button onClick={() => modalActiveHandler(undefined, `${typeOfElement}`)} className="button_add">
-          +
-        </button>
+      <div className="body__element_title">
+        <p>{typeOfElement === 'backlog' ? 'Сделать' : typeOfElement === 'process' ? 'В процессе' : 'Сделано'}</p>
+      </div>
+      <div className="elementsWrapper">
+        {TicketsState.ticketsList
+          .filter((ticket: ITicket) => ticket.type === `${typeOfElement}`)
+          .map((item: ITicket) => (
+            <KanbanTicket modalActiveHandler={modalActiveHandler} item={item} key={idCreator()} />
+          ))}
+        <div className="btn_wrapper">
+          <button onClick={() => modalActiveHandler(undefined, `${typeOfElement}`)} className="button_add">
+            +
+          </button>
+        </div>
       </div>
     </div>
   );

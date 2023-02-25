@@ -17,6 +17,7 @@ interface IKanbanFormTaskProps {
 const KanbanFormTask: React.FunctionComponent<IKanbanFormTaskProps> = ({setIsActiveModal}) => {
   const dispatch = useDispatch();
   const HoldTask = useSelector((state: RootState) => state.holdTask.holdTask);
+  const TicketsState = useSelector((state: RootState) => state.ticketList);
 
   function changeTitleHandler(event: React.ChangeEvent<HTMLInputElement>) {
     const taskItemObj = {...HoldTask};
@@ -73,7 +74,7 @@ const KanbanFormTask: React.FunctionComponent<IKanbanFormTaskProps> = ({setIsAct
           )}
 
           <BtnPrimary fontSize="h1" buttonHandleFunc={() => taskCreator()}>
-            Добавить
+            {TicketsState.ticketsList.includes(HoldTask) ? 'Изменить' : 'Добавить'}
           </BtnPrimary>
         </div>
       </div>
