@@ -35,7 +35,11 @@ const KanbanElement: React.FunctionComponent<IKanbanElementProps> = ({setIsActiv
         <p className="__element_title">
           {typeOfElement === 'backlog' ? 'Сделать' : typeOfElement === 'process' ? 'В процессе' : 'Сделано'}
         </p>
+        <p className={`__element_counter counter_${typeOfElement}`}>
+          {TicketsState.ticketsList.filter((ticket: ITicket) => ticket.type === `${typeOfElement}`).length}
+        </p>
       </div>
+
       <div className="elementsWrapper">
         {TicketsState.ticketsList
           .filter((ticket: ITicket) => ticket.type === `${typeOfElement}`)
