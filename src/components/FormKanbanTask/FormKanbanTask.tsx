@@ -24,7 +24,7 @@ const KanbanFormTask: React.FunctionComponent<IKanbanFormTaskProps> = ({setIsAct
     taskItemObj.title = event.target.value;
     dispatch(setHoldTask(taskItemObj));
   }
-  function changeDescriptionHandler(event: React.ChangeEvent<HTMLInputElement>) {
+  function changeDescriptionHandler(event: React.ChangeEvent<any>) {
     const taskItemObj = {...HoldTask};
     taskItemObj.description = event.target.value;
     dispatch(setHoldTask(taskItemObj));
@@ -51,20 +51,24 @@ const KanbanFormTask: React.FunctionComponent<IKanbanFormTaskProps> = ({setIsAct
           </BtnDanger>
         </div>
 
-        <p>Название задачи</p>
-        <div className={styles.modal__input__wrapper}>
-          <InputCommon placeholder="Введите заголовок" value={HoldTask.title} onChange={e => changeTitleHandler(e)} fontSize="h0" />
-        </div>
+        <label>
+          <p>Название задачи</p>
+          <div className={styles.modal__input__wrapper}>
+            <InputCommon placeholder="Введите заголовок" value={HoldTask.title} onChange={e => changeTitleHandler(e)} fontSize="h0" />
+          </div>
+        </label>
 
-        <p>Описание</p>
-        <div className={styles.modal__input__wrapper}>
-          <InputCommon
-            placeholder="Введите новое описание"
-            value={HoldTask.description}
-            onChange={e => changeDescriptionHandler(e)}
-            fontSize="h0"
-          />
-        </div>
+        <label>
+          <p>Описание</p>
+          <div className={styles.modal__input__wrapper}>
+            <textarea
+              spellCheck="false"
+              placeholder="Введите новое описание"
+              value={HoldTask.description}
+              onChange={event => changeDescriptionHandler(event)}
+            />
+          </div>
+        </label>
 
         <div className={styles.modal__btnWrapper}>
           {HoldTask.id && (

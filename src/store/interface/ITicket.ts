@@ -3,4 +3,5 @@ export default interface ITicket {
   title: string;
   description: string;
   type: string;
+  tags: string[];
 }
