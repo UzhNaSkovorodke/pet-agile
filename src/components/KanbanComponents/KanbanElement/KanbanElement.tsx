@@ -9,7 +9,7 @@ import './KanbanElement.scss';
 
 interface IKanbanElementProps {
   setIsActiveModal: React.Dispatch<React.SetStateAction<boolean>>;
-  TicketsState: {name: string; ticketsList: ITicket[]};
+  TicketsState: any;
   typeOfElement: string;
 }
 
@@ -36,16 +36,14 @@ const KanbanElement: React.FunctionComponent<IKanbanElementProps> = ({setIsActiv
           {typeOfElement === 'backlog' ? 'Сделать' : typeOfElement === 'process' ? 'В процессе' : 'Сделано'}
         </p>
         <p className={`__element_counter counter_${typeOfElement}`}>
-          {TicketsState.ticketsList.filter((ticket: ITicket) => ticket.type === `${typeOfElement}`).length}
+          {TicketsState.filter((ticket: ITicket) => ticket.type === `${typeOfElement}`).length}
         </p>
       </div>
 
       <div className="elementsWrapper">
-        {TicketsState.ticketsList
-          .filter((ticket: ITicket) => ticket.type === `${typeOfElement}`)
-          .map((item: ITicket) => (
-            <KanbanTicket modalActiveHandler={modalActiveHandler} item={item} key={idCreator()} />
-          ))}
+        {TicketsState.filter((ticket: ITicket) => ticket.type === `${typeOfElement}`).map((item: ITicket) => (
+          <KanbanTicket modalActiveHandler={modalActiveHandler} item={item} key={idCreator()} />
+        ))}
         <div className="btn_wrapper">
           <button onClick={() => modalActiveHandler(undefined, `${typeOfElement}`)} className="button_add">
             +
