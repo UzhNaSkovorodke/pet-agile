@@ -14,7 +14,8 @@ const initialState: TicketState = {
     id: -1,
     title: 'Здесь должна быть таска с которой работам',
     description: 'Здесь должна быть таска с которой работам',
-    type: 'backlog'
+    type: 'backlog',
+    tags: []
   }
 };
 
