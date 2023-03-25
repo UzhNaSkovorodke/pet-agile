@@ -1,7 +1,7 @@
 import ITicket from '../../../store/interface/ITicket';
 
 function idCreator() {
-  return Date.now() + Math.random() * 2;
+  return Date.now() + Math.random();
 }
 
 const list: ITicket[] = [

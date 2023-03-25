@@ -1,16 +1,17 @@
 import * as React from 'react';
 import {useDispatch} from 'react-redux';
 
-import icon1 from '../../../assets/icon/user1.png';
 import ITicket from '../../../store/interface/ITicket';
 import {addTicket, deleteTicket} from '../../../store/slices/TicketListSlice';
 
 import './KanbanTicket.scss';
+import KanbanTicketAvatar from './KanbanTicketAvatar';
 
 interface IKanbanTicketProps {
   modalActiveHandler: (item: ITicket) => void;
   item: ITicket;
 }
+
 let currentTask: ITicket = {id: 0, title: '', description: '', type: '', tags: []};
 
 const KanbanTicket: React.FunctionComponent<IKanbanTicketProps> = ({modalActiveHandler, item}) => {
@@ -52,10 +53,7 @@ const KanbanTicket: React.FunctionComponent<IKanbanTicketProps> = ({modalActiveH
           ))}
         </div>
 
-        <div className="ticket__avatarWrapper">
-          <img draggable={false} src={icon1} className="ticket__avatar ticket__" />
-          <p>Кирилл Дженкинс</p>
-        </div>
+        <KanbanTicketAvatar />
       </div>
     </div>
   );
