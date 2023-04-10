@@ -1,12 +1,7 @@
-import './App.scss'
-import Kanban from './pages/Kanban'
+import './App.scss';
 
 function App() {
-	return (
-		<div className="App">
-			<Kanban />
-		</div>
-	)
+  return <div className="App"></div>;
 }
 
-export default App
+export default App;
