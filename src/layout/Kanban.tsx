@@ -3,7 +3,7 @@ import React, {useEffect, useState} from 'react';
 
 import url from '../API/api';
 import Board from '../components/Board/Board';
-
+import Search from "../components/Search";
 import styles from './Kanban.module.scss';
 
 interface IKanbanProps {}
@@ -36,9 +36,7 @@ const Kanban: React.FunctionComponent<IKanbanProps> = props => {
   } else {
     return (
       <div className={styles.kanban}>
-        <div className={styles.search}>
-          <input className={styles.search__inp} type="text" name="" id="" />
-        </div>
+        <Search/>
 
         <div className={styles.boardWrapper}>
           <Board board={{boardTitle: 'Надо сделать', boardColor: 'red', tickets: tickets, id: 1, title: 'Нужно сделать'}} />
