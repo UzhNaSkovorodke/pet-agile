@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, {useEffect, useState} from 'react';
 
 import url from '../API/api';
-import BoardSample from '../components/Board/BoardSample';
+import Board from '../components/Board/Board';
 
 import styles from './Kanban.module.scss';
 
@@ -36,7 +36,14 @@ const Kanban: React.FunctionComponent<IKanbanProps> = props => {
   } else {
     return (
       <div className={styles.kanban}>
-        <BoardSample board={{boardColor: 'red', tickets: tickets, id: 1}} />
+        <div className={styles.search}>
+          <input className={styles.search__inp} type="text" name="" id="" />
+        </div>
+
+        <div className={styles.boardWrapper}>
+          <Board board={{boardTitle: 'Надо сделать', boardColor: 'red', tickets: tickets, id: 1, title: 'Нужно сделать'}} />
+          <Board board={{boardTitle: 'Сделано', boardColor: 'green', tickets: tickets, id: 1, title: 'Нужно сделать'}} />
+        </div>
       </div>
     );
   }
