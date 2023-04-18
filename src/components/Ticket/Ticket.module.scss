@@ -1,0 +1,18 @@
+.ticket {
+  background: white;
+  border: 1px solid rgb(231, 48, 15);
+  border-left: 4px solid rgb(231, 48, 15);
+  padding: 20px 20px;
+  margin: 20px 0px;
+  border-radius: 5px;
+}
+.ticket__status {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+.done {
+  color: lightgray;
+}
+.make {
+  color: rgb(219, 153, 153);
+}
