@@ -5,11 +5,11 @@ import OverlayingPopup from '../OverlayingPopup/OverlayingPopup';
 import styles from './Main.module.scss';
 
 interface IMainPopupProps {
-  isOpened: any;
+  isOpened: boolean;
   onPrevArrowClick?: any;
-  title?: any;
+  title?: string;
   onClose: any;
-  children: any;
+  children: React.ReactNode;
 }
 
 const MainPopup: React.FunctionComponent<IMainPopupProps> = ({children, onClose, isOpened, ...props}) => {

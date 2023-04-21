@@ -4,6 +4,7 @@ import React, {useEffect, useMemo, useState} from 'react';
 import url from '../API/api';
 import Board from '../components/Board/Board';
 import Search from '../components/Search/Search';
+import {iTicket} from '../components/Ticket/Ticket';
 
 import styles from './Kanban.module.scss';
 
@@ -15,15 +16,14 @@ const Kanban: React.FunctionComponent<IKanbanProps> = props => {
   const [tickets, setTickets] = useState([]);
 
   const [filter, setFilter] = useState('');
-  const [isModalActive, setIsModalActive] = useState(true);
 
-  const searchFunc = function (value: any) {
+  const searchFunc = function (value: string) {
     setFilter(value);
   };
 
   const searchedPost = useMemo(() => {
     if (filter) {
-      return [...tickets].filter((element: any) => element.title.toLowerCase().includes(filter.toLowerCase()));
+      return [...tickets].filter((element: iTicket) => element.title.toLowerCase().includes(filter.toLowerCase()));
     } else {
       return tickets;
     }
