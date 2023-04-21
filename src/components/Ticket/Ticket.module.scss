@@ -1,18 +1,51 @@
-.ticket {
-  background: white;
+@mixin borderRed {
   border: 1px solid rgb(231, 48, 15);
   border-left: 4px solid rgb(231, 48, 15);
+}
+
+.ticket {
+  background: white;
   padding: 20px 20px;
   margin: 20px 0px;
   border-radius: 5px;
 }
+.ticket > div {
+  margin: 10px 0px;
+}
+
 .ticket__status {
+  display: flex;
+}
+.ticket__title {
   font-size: 20px;
-  margin-bottom: 10px;
+  font-weight: 400;
+}
+
+.status__title {
+  font-size: 20px;
 }
 .done {
   color: lightgray;
 }
 .make {
   color: rgb(219, 153, 153);
+}
+
+.status__checkBox {
+  width: 25px;
+  height: 25px;
+  margin-right: 10px;
+  border-radius: 5px;
+  border: solid 2px grey;
+}
+
+.ticket__panel {
+  width: 40%;
+  display: flex;
+}
+.ticket__panel > div {
+  margin-right: 10px;
+}
+.red {
+  @include borderRed();
 }

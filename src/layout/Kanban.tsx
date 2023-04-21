@@ -3,7 +3,6 @@ import React, {useEffect, useMemo, useState} from 'react';
 
 import url from '../API/api';
 import Board from '../components/Board/Board';
-import Modal from '../components/Modal/Modal';
 import Search from '../components/Search/Search';
 
 import styles from './Kanban.module.scss';
@@ -16,7 +15,7 @@ const Kanban: React.FunctionComponent<IKanbanProps> = props => {
   const [tickets, setTickets] = useState([]);
 
   const [filter, setFilter] = useState('');
-  const [isModalActive, setIsModalActive] = useState(false);
+  const [isModalActive, setIsModalActive] = useState(true);
 
   const searchFunc = function (value: any) {
     setFilter(value);
@@ -54,15 +53,10 @@ const Kanban: React.FunctionComponent<IKanbanProps> = props => {
     return (
       <div className={styles.kanban}>
         <Search filter={filter} searchFunc={searchFunc} />
-        <button onClick={() => setIsModalActive(true)}>Show Modal</button>
-
-        <Modal isActive={isModalActive} setIsActive={setIsModalActive}>
-          here is a modal
-        </Modal>
 
         <div className={styles.boardWrapper}>
-          <Board board={{boardTitle: 'Надо сделать', boardColor: 'red', tickets: searchedPost, id: 1, title: 'Нужно сделать'}} />
-          <Board board={{boardTitle: 'Сделано', boardColor: 'green', tickets: searchedPost, id: 1, title: 'Нужно сделать'}} />
+          <Board board={{boardTitle: 'Надо сделать', tickets: searchedPost, id: 1, title: 'Нужно сделать'}} />
+          <Board board={{boardTitle: 'Надо сделать', tickets: searchedPost, id: 1, title: 'Нужно сделать'}} />
         </div>
       </div>
     );

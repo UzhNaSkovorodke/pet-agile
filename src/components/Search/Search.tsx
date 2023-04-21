@@ -1,6 +1,6 @@
 import React from 'react';
 
-import MyInput from '../../ui/input/MyInput';
+import MyInput from '../../UiKit/input/MyInput';
 
 import styles from './Search.module.scss';
 
