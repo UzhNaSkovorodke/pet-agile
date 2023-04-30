@@ -1,10 +1,11 @@
 import axios from 'axios';
 import React, {useEffect, useMemo, useState} from 'react';
 
-import url from '../API/api';
-import Board from '../components/Board/Board';
-import Search from '../components/Search/Search';
-import {iTicket} from '../components/Ticket/Ticket';
+import {url} from '../../API/api';
+import Board from '../../components/Board/Board';
+import Navigate from '../../components/Nav/Navigate';
+import Search from '../../components/Search/Search';
+import {iTicket} from '../../components/Ticket/Ticket';
 
 import styles from './Kanban.module.scss';
 
@@ -33,6 +34,8 @@ const Kanban: React.FunctionComponent<IKanbanProps> = props => {
     try {
       setIsLoading(true);
       const response: any = await axios.get(url, {params: {_limit: 6}});
+      console.log(response);
+
       setTickets(response.data);
     } catch (error) {
       setIsError(true);
@@ -52,9 +55,12 @@ const Kanban: React.FunctionComponent<IKanbanProps> = props => {
   } else {
     return (
       <div className={styles.kanban}>
+        <Navigate />
+
         <Search filter={filter} searchFunc={searchFunc} />
 
         <div className={styles.boardWrapper}>
+          <Board board={{boardTitle: 'Надо сделать', tickets: searchedPost, id: 1, title: 'Нужно сделать'}} />
           <Board board={{boardTitle: 'Надо сделать', tickets: searchedPost, id: 1, title: 'Нужно сделать'}} />
           <Board board={{boardTitle: 'Надо сделать', tickets: searchedPost, id: 1, title: 'Нужно сделать'}} />
         </div>

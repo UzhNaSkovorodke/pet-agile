@@ -39,9 +39,8 @@ const Ticket: React.FunctionComponent<ITicketProps> = ({ticketObject}) => {
         </div>
 
         <MainPopup onClose={setIsModalActive} isOpened={isModalActive}>
-          <div className="">
-            <div className="">{ticketObject.title}</div>
-            <div className=""> {String(ticketObject.completed)}</div>
+          <div className={styles.modal}>
+            <div className={styles.modal_title}>{ticketObject.title}</div>
           </div>
         </MainPopup>
       </>
