@@ -1,2 +1,3 @@
 const url: string = 'https://jsonplaceholder.typicode.com/todos/';
-export default url;
+const myUrl: string = 'http://localhost:5000/';
+export {url, myUrl};

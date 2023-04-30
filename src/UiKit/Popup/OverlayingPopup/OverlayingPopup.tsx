@@ -4,9 +4,9 @@ import styles from '../Popup.module.scss';
 import Portal from '../Portal/Portal';
 
 interface IOverlayingPopupProps {
-  isActive: any;
+  isActive: boolean;
   onClose: any;
-  children: any;
+  children: React.ReactNode;
 }
 
 const OverlayingPopup: React.FunctionComponent<IOverlayingPopupProps> = ({isActive, onClose, children}) => {

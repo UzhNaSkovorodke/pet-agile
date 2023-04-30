@@ -3,7 +3,7 @@ import React from 'react';
 import styles from './MyInput.module.scss';
 
 interface IMyInput {
-  value?: any;
+  value?: string;
   onChange?: any;
   placeholder?: string;
 }

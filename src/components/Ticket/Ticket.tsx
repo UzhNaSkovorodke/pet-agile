@@ -1,9 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
+
+import MainPopup from '../../UiKit/Popup/MainPopup/MainPopup';
 
 import styles from './Ticket.module.scss';
 import TicketDate from './TicketDate/TicketDate';
 
-interface iTicket {
+export interface iTicket {
   completed: boolean;
   userId: number;
   id: number;
@@ -12,43 +14,39 @@ interface iTicket {
 
 interface ITicketProps {
   ticketObject: iTicket;
-  color?: string;
 }
 
-const Ticket: React.FunctionComponent<ITicketProps> = ({ticketObject, color}) => {
-  const [ticket, setTicket] = useState<iTicket | null>(null);
+const Ticket: React.FunctionComponent<ITicketProps> = ({ticketObject}) => {
+  const [isModalActive, setIsModalActive] = useState(false);
 
-  useEffect(() => {
-    setTicket(ticketObject);
-  }, [ticketObject]);
-
-  if (ticket) {
+  if (ticketObject) {
     return (
-      <div className={styles.ticketWrapper}>
-        <div className={`${styles.ticket} ${styles.red}`}>
-          <div className={styles.ticket__status}>
-            <div className={styles.status__checkBox} />
-            <div className={[styles.status__title, ticket.completed ? styles.done : styles.make].join(' ')}>{String(ticket.completed)}</div>
+      <>
+        <div className={`${styles.ticket} ${styles.red}`} onClick={() => setIsModalActive(true)}>
+          <div className={styles.statusWrapper}>
+            <div className={[styles.status, ticketObject.completed ? styles.done : styles.make].join(' ')}>
+              {String(ticketObject.completed)}
+            </div>
           </div>
-
-          <div className={styles.ticket__title}>{ticket.title}</div>
-
-          <div className={styles.ticket__panel}>
-            <div className={styles.panel__date}>
+          <div className={styles.title}>{ticketObject.title}</div>
+          <div className={styles.panel}>
+            <div className={styles.date}>
               <TicketDate />
             </div>
-            <div className={styles.panel__descript}>descr</div>
-            <div className={styles.panel__attached}>attach</div>
+            <div className={styles.descript}>descr</div>
+            <div className={styles.attached}>attach</div>
           </div>
         </div>
-      </div>
+
+        <MainPopup onClose={setIsModalActive} isOpened={isModalActive}>
+          <div className={styles.modal}>
+            <div className={styles.modal_title}>{ticketObject.title}</div>
+          </div>
+        </MainPopup>
+      </>
     );
   } else {
-    return (
-      <div className={styles.ticketWrapper}>
-        <div className={styles.ticket}>Данные тикета прогружаются</div>
-      </div>
-    );
+    return <div className={styles.ticket}>Данные тикета прогружаются</div>;
   }
 };
 

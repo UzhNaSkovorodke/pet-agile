@@ -8,20 +8,21 @@
   padding: 20px 20px;
   margin: 20px 0px;
   border-radius: 5px;
+  cursor: pointer;
 }
 .ticket > div {
   margin: 10px 0px;
 }
 
-.ticket__status {
+.statusWrapper {
   display: flex;
 }
-.ticket__title {
+.title {
   font-size: 20px;
   font-weight: 400;
 }
 
-.status__title {
+.status {
   font-size: 20px;
 }
 .done {
@@ -31,19 +32,11 @@
   color: rgb(219, 153, 153);
 }
 
-.status__checkBox {
-  width: 25px;
-  height: 25px;
-  margin-right: 10px;
-  border-radius: 5px;
-  border: solid 2px grey;
-}
-
-.ticket__panel {
+.panel {
   width: 40%;
   display: flex;
 }
-.ticket__panel > div {
+.panel > div {
   margin-right: 10px;
 }
 .red {

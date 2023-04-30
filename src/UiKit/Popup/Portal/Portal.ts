@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import ReactDOM from 'react-dom';
 
 interface IPortalProps {
-  children: any;
+  children: React.ReactNode;
 }
 
 const Portal: React.FunctionComponent<IPortalProps> = ({children}) => {

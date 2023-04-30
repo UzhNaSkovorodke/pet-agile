@@ -1,12 +1,12 @@
 import * as React from 'react';
 
-import Ticket from '../Ticket/Ticket';
+import Ticket, {iTicket} from '../Ticket/Ticket';
 
 import styles from './Board.module.scss';
 
 interface iBoard {
   boardTitle: string;
-  tickets: any;
+  tickets: iTicket[];
   title: string;
   id: number;
 }
@@ -18,9 +18,9 @@ interface IBoardProps {
 const Board: React.FunctionComponent<IBoardProps> = ({board}) => {
   return (
     <div className={styles.board}>
-      <div className={styles.board__head}>{board.title}</div>
-      <div className={styles.board__main}>
-        {board.tickets.length > 0 && board.tickets.map((element: any) => <Ticket key={element.id} ticketObject={element} color={'red'} />)}
+      <div className={styles.head}>{board.title}</div>
+      <div className={styles.main}>
+        {board.tickets.length > 0 && board.tickets.map((element: iTicket) => <Ticket key={element.id} ticketObject={element} />)}
       </div>
     </div>
   );
