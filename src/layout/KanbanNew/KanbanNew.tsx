@@ -39,28 +39,7 @@ const KanbanNew: React.FunctionComponent<IKanbanNewProps> = props => {
     } catch (error) {
       setIsError(true);
     } finally {
-      console.log('заперта');
-
       setIsLoading(false);
-    }
-  }
-
-  async function makePost() {
-    try {
-      setTimeout(() => {
-        makeFetch();
-      }, 1000);
-
-      const response: any = await axios.post(myUrl, {
-        userId: 228,
-        id: Date.now(),
-        title: 'кто не пукал тот попу не порвет',
-        completed: true
-      });
-    } catch (error) {
-      console.log(error);
-    } finally {
-      console.log('отправил');
     }
   }
 
@@ -76,7 +55,6 @@ const KanbanNew: React.FunctionComponent<IKanbanNewProps> = props => {
     return (
       <div className={styles.kanban}>
         <Navigate />
-        <button onClick={() => makePost()}>Отправить запрос</button>
         <Search filter={filter} searchFunc={searchFunc} />
 
         <div className={styles.boardWrapper}>

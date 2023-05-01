@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 
 import MainPopup from '../../UiKit/Popup/MainPopup/MainPopup';
+import CustomCheck from '../../UiKit/input/CustomCheck/CustomCheck';
 
 import styles from './Ticket.module.scss';
 import TicketDate from './TicketDate/TicketDate';
@@ -18,23 +19,35 @@ interface ITicketProps {
 
 const Ticket: React.FunctionComponent<ITicketProps> = ({ticketObject}) => {
   const [isModalActive, setIsModalActive] = useState(false);
+  const [IsdidTask, setIsDidTask] = useState(false);
+
+  function doingTaskHelper(status: boolean) {
+    setIsDidTask(status);
+  }
+
+  function labelClickHandler(e: any) {
+    e.stopPropagation();
+  }
 
   if (ticketObject) {
     return (
       <>
-        <div className={`${styles.ticket} ${styles.red}`} onClick={() => setIsModalActive(true)}>
-          <div className={styles.statusWrapper}>
-            <div className={[styles.status, ticketObject.completed ? styles.done : styles.make].join(' ')}>
-              {String(ticketObject.completed)}
-            </div>
-          </div>
+        <div
+          className={`${styles.ticket} ${IsdidTask ? styles.ticketDisable : styles.ticketActive}`}
+          onClick={() => setIsModalActive(true)}
+        >
+          <label className={styles.status} onClick={e => labelClickHandler(e)}>
+            <CustomCheck onChange={doingTaskHelper} />
+            <span className={[styles.labelText, IsdidTask ? styles.disable : styles.active].join(' ')}>
+              {IsdidTask ? 'Сделано' : 'Не сделано'}
+            </span>
+          </label>
+
           <div className={styles.title}>{ticketObject.title}</div>
           <div className={styles.panel}>
             <div className={styles.date}>
               <TicketDate />
             </div>
-            <div className={styles.descript}>descr</div>
-            <div className={styles.attached}>attach</div>
           </div>
         </div>
 
