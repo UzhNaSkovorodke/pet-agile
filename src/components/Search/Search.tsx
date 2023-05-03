@@ -8,7 +8,6 @@ interface ISearchProps {
   filter: string;
   searchFunc: any;
 }
-
 const Search: React.FunctionComponent<ISearchProps> = ({filter, searchFunc}) => {
   return (
     <div className={styles.search}>

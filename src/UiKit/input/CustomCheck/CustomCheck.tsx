@@ -13,7 +13,7 @@ function CustomCheck({onChange, ...props}: ICustomCheck) {
     onChange(checked);
   }, [checked]);
 
-  return <input className={styles.check} checked={checked} onClick={() => setChecked(prev => !prev)} type="checkbox" {...props} />;
+  return <input className={styles.check} checked={checked} onChange={() => setChecked(prev => !prev)} type="checkbox" {...props} />;
 }
 
 export default CustomCheck;

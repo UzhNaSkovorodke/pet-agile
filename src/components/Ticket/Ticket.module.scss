@@ -3,15 +3,18 @@ $disable: grey;
 
 .ticket {
   background: white;
+
   padding: 0px 20px 20px 20px;
   margin: 20px 0px;
   border-radius: 15px;
   cursor: pointer;
 }
+
 .ticketActive {
   border: 2px solid $active;
   border-left: 6px solid $active;
 }
+
 .ticketDisable {
   border: 2px solid $disable;
   border-left: 6px solid $disable;

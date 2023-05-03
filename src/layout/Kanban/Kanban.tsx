@@ -34,7 +34,6 @@ const Kanban: React.FunctionComponent<IKanbanProps> = props => {
     try {
       setIsLoading(true);
       const response: any = await axios.get(url, {params: {_limit: 6}});
-      console.log(response);
 
       setTickets(response.data);
     } catch (error) {
@@ -60,8 +59,6 @@ const Kanban: React.FunctionComponent<IKanbanProps> = props => {
         <Search filter={filter} searchFunc={searchFunc} />
 
         <div className={styles.boardWrapper}>
-          <Board board={{boardTitle: 'Надо сделать', tickets: searchedPost, id: 1, title: 'Нужно сделать'}} />
-          <Board board={{boardTitle: 'Надо сделать', tickets: searchedPost, id: 1, title: 'Нужно сделать'}} />
           <Board board={{boardTitle: 'Надо сделать', tickets: searchedPost, id: 1, title: 'Нужно сделать'}} />
         </div>
       </div>
