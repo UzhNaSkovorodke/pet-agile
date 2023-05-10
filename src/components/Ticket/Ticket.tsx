@@ -1,31 +1,61 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
+import {url} from '../../API/api';
 import MainPopup from '../../UiKit/Popup/MainPopup/MainPopup';
 import CustomCheck from '../../UiKit/input/CustomCheck/CustomCheck';
 
 import styles from './Ticket.module.scss';
 import TicketDate from './TicketDate/TicketDate';
+import TicketForm from './TicketForm/TicketForm';
 
-export interface iTicket {
+export interface ITicket {
   completed: boolean;
   userId: number;
   id: number;
   title: string;
+  description: string;
+  typeboard: string;
 }
 
 interface ITicketProps {
-  ticketObject: iTicket;
+  ticketObject: ITicket;
+  setTickets: React.Dispatch<React.SetStateAction<ITicket[]>>;
 }
 
 const Ticket: React.FunctionComponent<ITicketProps> = ({ticketObject}) => {
-  const [isModalActive, setIsModalActive] = useState(false);
-  const [IsdidTask, setIsDidTask] = useState(false);
+  const [isModalActive, setIsModalActive] = useState<boolean>(false);
+  const [IsdidTask, setIsDidTask] = useState<boolean>(false);
+  const [error, setError] = useState<string>('');
 
-  function doingTaskHelper(status: boolean) {
-    setIsDidTask(status);
+  useEffect(() => {
+    setIsDidTask(ticketObject.completed);
+  }, []);
+
+  async function updateStatus() {
+    let reqBody = {
+      title: ticketObject.title,
+      description: ticketObject.description,
+      completed: IsdidTask,
+      typeboard: ticketObject.typeboard
+    };
+    try {
+      fetch(`${url}/${ticketObject.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify(reqBody)
+      });
+    } catch (error: any) {
+      setError(error.message);
+    }
   }
 
-  function labelClickHandler(e: any) {
+  useEffect(() => {
+    updateStatus();
+  }, [IsdidTask]);
+
+  function labelClickHandler(e: React.MouseEvent<HTMLLabelElement>) {
     e.stopPropagation();
   }
 
@@ -36,8 +66,8 @@ const Ticket: React.FunctionComponent<ITicketProps> = ({ticketObject}) => {
           className={`${styles.ticket} ${IsdidTask ? styles.ticketDisable : styles.ticketActive}`}
           onClick={() => setIsModalActive(true)}
         >
-          <label className={styles.status} onClick={e => labelClickHandler(e)}>
-            <CustomCheck onChange={doingTaskHelper} />
+          <label className={styles.taskStatus} onClick={e => labelClickHandler(e)}>
+            <CustomCheck isCheckedAlready={ticketObject.completed} onChange={setIsDidTask} />
             <span className={[styles.labelText, IsdidTask ? styles.disable : styles.active].join(' ')}>
               {IsdidTask ? 'Сделано' : 'Не сделано'}
             </span>
@@ -53,7 +83,7 @@ const Ticket: React.FunctionComponent<ITicketProps> = ({ticketObject}) => {
 
         <MainPopup onClose={setIsModalActive} isOpened={isModalActive}>
           <div className={styles.modal}>
-            <div className={styles.modal_title}>{ticketObject.title}</div>
+            <TicketForm ticketObject={ticketObject} />
           </div>
         </MainPopup>
       </>

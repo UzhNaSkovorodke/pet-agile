@@ -4,10 +4,14 @@ import styles from './CustomCheck.module.scss';
 
 interface ICustomCheck {
   onChange?: any;
+  isCheckedAlready: boolean;
 }
 
-function CustomCheck({onChange, ...props}: ICustomCheck) {
+function CustomCheck({onChange, isCheckedAlready, ...props}: ICustomCheck) {
   const [checked, setChecked] = useState<boolean>(false);
+  useEffect(() => {
+    setChecked(isCheckedAlready);
+  }, []);
 
   useEffect(() => {
     onChange(checked);

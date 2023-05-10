@@ -3,67 +3,111 @@ import React, {useEffect, useMemo, useState} from 'react';
 
 import {url} from '../../API/api';
 import Board from '../../components/Board/Board';
-import Navigate from '../../components/Nav/Navigate';
 import Search from '../../components/Search/Search';
-import {iTicket} from '../../components/Ticket/Ticket';
+import {ITicket} from '../../components/Ticket/Ticket';
 
 import styles from './Kanban.module.scss';
+import TaskContext from './TicketContext';
 
-interface IKanbanProps {}
+interface IKanbanNewProps {}
 
-const Kanban: React.FunctionComponent<IKanbanProps> = props => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
-  const [tickets, setTickets] = useState([]);
+const KanbanNew: React.FunctionComponent<IKanbanNewProps> = props => {
+  const task = {
+    title: 'Помыть кухню',
+    description: 'Нужно будет помыть полы в кухне к вечеру',
+    userid: 1,
+    id: Date.now(),
+    completed: false,
+    typeboard: 'Надо сделать'
+  };
+
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string>('');
+  const [tickets, setTickets] = useState<ITicket[]>([]);
 
   const [filter, setFilter] = useState('');
+
+  const ticketValue = {
+    tickets,
+    setTickets
+  };
 
   const searchFunc = function (value: string) {
     setFilter(value);
   };
 
   const searchedPost = useMemo(() => {
+    //сделать так чтобы не ререндерилось если таски после введение нового символа не поменялись (использовать новый state?)
     if (filter) {
-      return [...tickets].filter((element: iTicket) => element.title.toLowerCase().includes(filter.toLowerCase()));
+      return [...tickets].filter((element: ITicket) => element.title.toLowerCase().includes(filter.toLowerCase())).sort();
     } else {
       return tickets;
     }
   }, [filter, tickets]);
 
-  async function makeFetch() {
+  async function getTasks() {
     try {
       setIsLoading(true);
-      const response: any = await axios.get(url, {params: {_limit: 6}});
-
-      setTickets(response.data);
-    } catch (error) {
-      setIsError(true);
+      fetch(url)
+        .then(response => response.json())
+        .then(json => setTickets(json));
+    } catch (error: any) {
+      setError(error.message);
     } finally {
       setIsLoading(false);
     }
   }
 
+  async function getTask(id: number) {
+    try {
+      fetch(`${url}/${id}`)
+        .then(response => response.json())
+        .then(json => console.log(json));
+    } catch (error: any) {
+      setError(error.message);
+    }
+  }
+
+  async function createTask() {
+    try {
+      fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify(task)
+      })
+        .then(response => response.json())
+        .then(json => setTickets([...tickets, json]));
+    } catch (error: any) {
+      setError(error.message);
+    }
+  }
+
   useEffect(() => {
-    makeFetch();
+    getTasks();
   }, []);
 
-  if (isError) {
-    return <div className={styles.error}>Error, что-то не прогрузилось</div>;
+  if (error) {
+    return <div className={styles.error}>Ошибка, что-то не прогрузилось</div>;
   } else if (isLoading) {
     return <div className={styles.loading}>Данные прогружаются</div>;
   } else {
     return (
       <div className={styles.kanban}>
-        <Navigate />
-
         <Search filter={filter} searchFunc={searchFunc} />
 
-        <div className={styles.boardWrapper}>
-          <Board board={{boardTitle: 'Надо сделать', tickets: searchedPost, id: 1, title: 'Нужно сделать'}} />
-        </div>
+        <TaskContext.Provider value={ticketValue}>
+          <div className={styles.boardWrapper}>
+            <Board setTickets={setTickets} board={{boardTitle: 'Надо сделать', tickets: searchedPost, id: 1, title: 'Нужно сделать'}} />
+          </div>
+
+          <button onClick={() => createTask()}>Создать таску</button>
+          <button onClick={() => getTask(1)}>1 таск</button>
+        </TaskContext.Provider>
       </div>
     );
   }
 };
 
-export default Kanban;
+export default KanbanNew;
