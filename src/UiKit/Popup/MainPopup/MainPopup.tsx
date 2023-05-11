@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import OverlayingPopup from '../OverlayingPopup/OverlayingPopup';
 
-import styles from './Main.module.scss';
+import styles from './MainPopup.module.scss';
 
 interface IMainPopupProps {
   isOpened: boolean;

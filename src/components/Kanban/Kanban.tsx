@@ -1,26 +1,16 @@
-import axios from 'axios';
 import React, {useEffect, useMemo, useState} from 'react';
 
 import {url} from '../../API/api';
 import Board from '../../components/Board/Board';
+import TaskContext from '../../components/Context/TicketContext';
 import Search from '../../components/Search/Search';
 import {ITicket} from '../../components/Ticket/Ticket';
 
 import styles from './Kanban.module.scss';
-import TaskContext from './TicketContext';
 
 interface IKanbanNewProps {}
 
 const KanbanNew: React.FunctionComponent<IKanbanNewProps> = props => {
-  const task = {
-    title: 'Помыть кухню',
-    description: 'Нужно будет помыть полы в кухне к вечеру',
-    userid: 1,
-    id: Date.now(),
-    completed: false,
-    typeboard: 'Надо сделать'
-  };
-
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
   const [tickets, setTickets] = useState<ITicket[]>([]);
@@ -37,7 +27,6 @@ const KanbanNew: React.FunctionComponent<IKanbanNewProps> = props => {
   };
 
   const searchedPost = useMemo(() => {
-    //сделать так чтобы не ререндерилось если таски после введение нового символа не поменялись (использовать новый state?)
     if (filter) {
       return [...tickets].filter((element: ITicket) => element.title.toLowerCase().includes(filter.toLowerCase())).sort();
     } else {
@@ -68,22 +57,6 @@ const KanbanNew: React.FunctionComponent<IKanbanNewProps> = props => {
     }
   }
 
-  async function createTask() {
-    try {
-      fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json;charset=utf-8'
-        },
-        body: JSON.stringify(task)
-      })
-        .then(response => response.json())
-        .then(json => setTickets([...tickets, json]));
-    } catch (error: any) {
-      setError(error.message);
-    }
-  }
-
   useEffect(() => {
     getTasks();
   }, []);
@@ -101,9 +74,6 @@ const KanbanNew: React.FunctionComponent<IKanbanNewProps> = props => {
           <div className={styles.boardWrapper}>
             <Board setTickets={setTickets} board={{boardTitle: 'Надо сделать', tickets: searchedPost, id: 1, title: 'Нужно сделать'}} />
           </div>
-
-          <button onClick={() => createTask()}>Создать таску</button>
-          <button onClick={() => getTask(1)}>1 таск</button>
         </TaskContext.Provider>
       </div>
     );

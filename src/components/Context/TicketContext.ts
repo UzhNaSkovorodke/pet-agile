@@ -1,6 +1,6 @@
 import {createContext} from 'react';
 
-import {ITicket} from '../../components/Ticket/Ticket';
+import {ITicket} from '../Ticket/Ticket';
 
 export interface ITicketContext {
   tickets: ITicket[];

@@ -1,24 +1,36 @@
 import * as React from 'react';
-import {useContext} from 'react';
 
-import TicketContext, {ITicketContext} from '../../../layout/Kanban/TicketContext';
+import CustomInput from '../../../UiKit/input/CustomInput/CustomInput';
 import {ITicket} from '../Ticket';
 
 import styles from './TicketForm.module.scss';
 
 interface ITicketFormProps {
   ticketObject: ITicket;
+  setTitle: React.Dispatch<React.SetStateAction<string>>;
+  setDescription: React.Dispatch<React.SetStateAction<string>>;
+  title: string;
+  description: string;
 }
 
-const TicketForm: React.FunctionComponent<ITicketFormProps> = ({ticketObject}) => {
-  const ticketsState = useContext<ITicketContext>(TicketContext);
-  console.log(ticketsState);
+const TicketForm: React.FunctionComponent<ITicketFormProps> = ({ticketObject, title, setTitle, description, setDescription}) => {
+  React.useEffect(() => {
+    setTitle(ticketObject.title);
+    setDescription(ticketObject.description);
+  }, []);
 
   return (
-    <div className="">
-      <div className={styles.title}>{ticketObject.title}</div>
-      <div className={styles.description}>{ticketObject.description}</div>
-    </div>
+    <form className={styles.form}>
+      <div className={styles.title}>
+        <CustomInput value={title} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTitle(e.target.value)} />
+      </div>
+
+      <textarea
+        className={styles.description}
+        defaultValue={description}
+        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setDescription(e.target.value)}
+      />
+    </form>
   );
 };
 

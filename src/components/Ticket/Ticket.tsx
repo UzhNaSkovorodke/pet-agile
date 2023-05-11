@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 
 import {url} from '../../API/api';
 import MainPopup from '../../UiKit/Popup/MainPopup/MainPopup';
@@ -24,36 +24,42 @@ interface ITicketProps {
 
 const Ticket: React.FunctionComponent<ITicketProps> = ({ticketObject}) => {
   const [isModalActive, setIsModalActive] = useState<boolean>(false);
-  const [IsdidTask, setIsDidTask] = useState<boolean>(false);
-  const [error, setError] = useState<string>('');
+  const [isDidTask, setisDidTask] = useState<boolean>(ticketObject.completed);
+  const [title, setTitle] = useState<string>(ticketObject.title);
+  const [description, setDescription] = useState<string>(ticketObject.description);
 
-  useEffect(() => {
-    setIsDidTask(ticketObject.completed);
-  }, []);
+  console.log('dsd');
 
-  async function updateStatus() {
-    let reqBody = {
-      title: ticketObject.title,
-      description: ticketObject.description,
-      completed: IsdidTask,
-      typeboard: ticketObject.typeboard
-    };
-    try {
-      fetch(`${url}/${ticketObject.id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json;charset=utf-8'
-        },
-        body: JSON.stringify(reqBody)
-      });
-    } catch (error: any) {
-      setError(error.message);
-    }
+  async function updateStatusTask() {
+    setisDidTask(prev => !prev);
+    const task = ticketObject;
+    task.completed = !isDidTask;
+    await fetch(`${url}/${ticketObject.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      },
+      body: JSON.stringify(task)
+    });
   }
 
-  useEffect(() => {
-    updateStatus();
-  }, [IsdidTask]);
+  async function updateTextTask(title: string, description: string) {
+    const task = ticketObject;
+    task.title = title;
+    task.description = description;
+    await fetch(`${url}/${ticketObject.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      },
+      body: JSON.stringify(task)
+    });
+  }
+
+  function onModalClose(modalStatus: boolean) {
+    setIsModalActive(modalStatus);
+    updateTextTask(title, description);
+  }
 
   function labelClickHandler(e: React.MouseEvent<HTMLLabelElement>) {
     e.stopPropagation();
@@ -63,17 +69,17 @@ const Ticket: React.FunctionComponent<ITicketProps> = ({ticketObject}) => {
     return (
       <>
         <div
-          className={`${styles.ticket} ${IsdidTask ? styles.ticketDisable : styles.ticketActive}`}
+          className={`${styles.ticket} ${isDidTask ? styles.ticketDisable : styles.ticketActive}`}
           onClick={() => setIsModalActive(true)}
         >
           <label className={styles.taskStatus} onClick={e => labelClickHandler(e)}>
-            <CustomCheck isCheckedAlready={ticketObject.completed} onChange={setIsDidTask} />
-            <span className={[styles.labelText, IsdidTask ? styles.disable : styles.active].join(' ')}>
-              {IsdidTask ? 'Сделано' : 'Не сделано'}
+            <CustomCheck value={isDidTask} onChange={updateStatusTask} />
+            <span className={[styles.labelText, isDidTask ? styles.disable : styles.active].join(' ')}>
+              {isDidTask ? 'Сделано' : 'Не сделано'}
             </span>
           </label>
 
-          <div className={styles.title}>{ticketObject.title}</div>
+          <div className={styles.title}>{title}</div>
           <div className={styles.panel}>
             <div className={styles.date}>
               <TicketDate />
@@ -81,10 +87,14 @@ const Ticket: React.FunctionComponent<ITicketProps> = ({ticketObject}) => {
           </div>
         </div>
 
-        <MainPopup onClose={setIsModalActive} isOpened={isModalActive}>
-          <div className={styles.modal}>
-            <TicketForm ticketObject={ticketObject} />
-          </div>
+        <MainPopup onClose={onModalClose} isOpened={isModalActive}>
+          <TicketForm
+            setTitle={setTitle}
+            title={title}
+            setDescription={setDescription}
+            description={description}
+            ticketObject={ticketObject}
+          />
         </MainPopup>
       </>
     );
