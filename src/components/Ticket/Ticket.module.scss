@@ -4,58 +4,72 @@ $disable: grey;
 .ticket {
   background: white;
   min-width: 400px;
-  padding: 0px 20px 20px 20px;
-  margin: 20px 0px;
+  padding: 15px 20px;
+  margin-bottom: 20px;
   border-radius: 15px;
   cursor: pointer;
 }
 
-.ticketActive {
+.active {
   border: 2px solid $active;
   border-left: 6px solid $active;
 }
 
-.ticketDisable {
+.disable {
   border: 2px solid $disable;
   border-left: 6px solid $disable;
   opacity: 0.4;
 }
 
-.title {
-  padding-top: 20px;
-  padding-bottom: 20px;
-  font-size: 20px;
-  font-weight: 400;
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.taskStatus {
+.title {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.status {
   width: 50%;
+  padding: 6px;
   display: flex;
+
   -moz-user-select: -moz-none;
   -o-user-select: none;
   -khtml-user-select: none;
   -webkit-user-select: none;
   user-select: none;
   cursor: pointer;
-  padding: 30px 5px 0px 5px;
 }
 
-.panel {
+.footer {
   width: 40%;
 }
-.panel > div {
-  margin-right: 10px;
-}
-
-.labelText {
+.label_text {
   margin-left: 10px;
   font-size: 18px;
   font-weight: 500;
 }
 
-.active {
+.text_active {
   color: $active;
 }
-.disable {
+.text_disable {
   color: $disable;
+}
+
+.delete {
+  padding: 10px;
+  cursor: pointer;
+  border: none;
+  background: none;
+  img {
+    width: 20px;
+  }
+}
+.delete:hover {
+  opacity: 0.8;
 }

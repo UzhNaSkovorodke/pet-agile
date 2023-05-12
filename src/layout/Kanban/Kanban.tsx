@@ -1,10 +1,10 @@
 import React, {useEffect, useMemo, useState} from 'react';
 
 import {url} from '../../API/api';
-import Board from '../../components/Board/Board';
-import TaskContext from '../../components/Context/TicketContext';
-import Search from '../../components/Search/Search';
 import {ITicket} from '../../components/Ticket/Ticket';
+import TaskContext from '../../context/TicketContext';
+import Board from '../../modules/Board/Board';
+import Search from '../../modules/Search/Search';
 
 import styles from './Kanban.module.scss';
 
@@ -13,13 +13,16 @@ interface IKanbanNewProps {}
 const KanbanNew: React.FunctionComponent<IKanbanNewProps> = props => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
+  const [isModalActive, setIsModalActive] = useState<boolean>(false);
   const [tickets, setTickets] = useState<ITicket[]>([]);
 
   const [filter, setFilter] = useState('');
 
   const ticketValue = {
     tickets,
-    setTickets
+    setTickets,
+    isModalActive,
+    setIsModalActive
   };
 
   const searchFunc = function (value: string) {

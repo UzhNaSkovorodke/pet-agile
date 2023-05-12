@@ -27,18 +27,12 @@
   font-size: 20px;
   padding: 15px;
   border-radius: 10px;
-  border: 1px solid white;
+  border: 2px solid white;
 }
 .description:focus {
-  outline: 2px solid lightgrey;
+  outline: none;
+  border: 2px solid lightgrey;
 }
-.updateBtn {
-  margin-top: 40px;
-  background: darkred;
-  color: white;
-  cursor: pointer;
-  border-radius: 10px;
-  padding: 15px;
-  font-size: 20px;
-  border: none;
+.description:hover {
+  border: 2px solid lightgray;
 }

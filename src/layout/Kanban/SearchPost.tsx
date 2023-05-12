@@ -1,7 +1,7 @@
 import {useContext, useMemo} from 'react';
 
-import TicketContext, {ITicketContext} from '../Context/TicketContext';
-import {ITicket} from '../Ticket/Ticket';
+import {ITicket} from '../../components/Ticket/Ticket';
+import TicketContext, {ITicketContext} from '../../context/TicketContext';
 
 type Props = {
   filter: string;

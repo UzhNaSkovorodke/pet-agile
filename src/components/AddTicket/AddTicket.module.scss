@@ -1,0 +1,19 @@
+.addcomponent {
+  width: 100%;
+  background: white;
+  min-width: 400px;
+  padding: 45px 20px;
+  margin-bottom: 20px;
+  border-radius: 15px;
+  cursor: pointer;
+  font-size: 20px;
+  border: none;
+}
+.addcomponent:hover {
+  background: rgb(219, 219, 219);
+  outline: none;
+}
+.addcomponent:active {
+  background: rgb(197, 197, 197);
+  outline: none;
+}

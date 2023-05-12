@@ -1,8 +1,8 @@
 import ReactDOM from 'react-dom/client';
 import {RouterProvider, createBrowserRouter} from 'react-router-dom';
 
-import Kanban from './components/Kanban/Kanban';
 import './index.css';
+import Kanban from './layout/Kanban/Kanban';
 
 const router = createBrowserRouter([
   {

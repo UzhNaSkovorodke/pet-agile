@@ -1,6 +1,7 @@
 import * as React from 'react';
 
-import Ticket, {ITicket} from '../Ticket/Ticket';
+import AddTicket from '../../components/AddTicket/AddTicket';
+import Ticket, {ITicket} from '../../components/Ticket/Ticket';
 
 import styles from './Board.module.scss';
 
@@ -24,6 +25,8 @@ const Board: React.FunctionComponent<IBoardProps> = ({board, setTickets}) => {
         {board.tickets.length > 0 &&
           board.tickets.map((element: ITicket) => <Ticket key={element.id} setTickets={setTickets} ticketObject={element} />)}
       </div>
+
+      <AddTicket />
     </div>
   );
 };
