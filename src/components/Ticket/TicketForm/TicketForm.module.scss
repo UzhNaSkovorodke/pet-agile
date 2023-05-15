@@ -2,16 +2,15 @@
   padding: 40px;
 
   width: 40vw;
-  max-height: 50vh;
+  max-height: 70vh;
   min-height: 10vh;
 }
 
 .title {
-  margin-bottom: 50px;
-  border-radius: 10px;
-  input {
-    font-size: 20px;
-  }
+  margin-bottom: 30px;
+}
+.type {
+  margin-bottom: 30px;
 }
 .description {
   width: 100%;
@@ -35,4 +34,8 @@
 }
 .description:hover {
   border: 2px solid lightgray;
+}
+.input_title {
+  font-size: 18px;
+  margin-bottom: 10px;
 }

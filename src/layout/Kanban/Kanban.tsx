@@ -3,14 +3,15 @@ import React, {useEffect, useMemo, useState} from 'react';
 import {url} from '../../API/api';
 import {ITicket} from '../../components/Ticket/Ticket';
 import TaskContext from '../../context/TicketContext';
+import {useFetch} from '../../hooks/useFetch';
 import Board from '../../modules/Board/Board';
 import Search from '../../modules/Search/Search';
 
 import styles from './Kanban.module.scss';
 
-interface IKanbanNewProps {}
+interface Kanban {}
 
-const KanbanNew: React.FunctionComponent<IKanbanNewProps> = props => {
+const Kanban: React.FunctionComponent<Kanban> = props => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
   const [isModalActive, setIsModalActive] = useState<boolean>(false);
@@ -38,25 +39,18 @@ const KanbanNew: React.FunctionComponent<IKanbanNewProps> = props => {
   }, [filter, tickets]);
 
   async function getTasks() {
+    const id = 1;
     try {
       setIsLoading(true);
-      fetch(url)
+      fetch(`${url}/task/user${id}`)
         .then(response => response.json())
-        .then(json => setTickets(json));
+        .then(json => {
+          setTickets(json);
+        });
     } catch (error: any) {
       setError(error.message);
     } finally {
       setIsLoading(false);
-    }
-  }
-
-  async function getTask(id: number) {
-    try {
-      fetch(`${url}/${id}`)
-        .then(response => response.json())
-        .then(json => console.log(json));
-    } catch (error: any) {
-      setError(error.message);
     }
   }
 
@@ -75,7 +69,7 @@ const KanbanNew: React.FunctionComponent<IKanbanNewProps> = props => {
 
         <TaskContext.Provider value={ticketValue}>
           <div className={styles.boardWrapper}>
-            <Board setTickets={setTickets} board={{boardTitle: 'Надо сделать', tickets: searchedPost, id: 1, title: 'Нужно сделать'}} />
+            <Board key={Date.now() + Math.random()} setTickets={setTickets} board={{tickets: searchedPost, id: 1, title: 'Надо сделать'}} />
           </div>
         </TaskContext.Provider>
       </div>
@@ -83,4 +77,4 @@ const KanbanNew: React.FunctionComponent<IKanbanNewProps> = props => {
   }
 };
 
-export default KanbanNew;
+export default Kanban;

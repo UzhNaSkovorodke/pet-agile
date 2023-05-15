@@ -1,19 +1,20 @@
 import * as React from 'react';
 
+import {url} from '../../API/api';
 import AddTicket from '../../components/AddTicket/AddTicket';
 import Ticket, {ITicket} from '../../components/Ticket/Ticket';
+import {useFetch} from '../../hooks/useFetch';
 
 import styles from './Board.module.scss';
 
-interface iBoard {
-  boardTitle: string;
+interface IBoard {
   tickets: ITicket[];
   title: string;
   id: number;
 }
 
 interface IBoardProps {
-  board: iBoard;
+  board: IBoard;
   setTickets: React.Dispatch<React.SetStateAction<ITicket[]>>;
 }
 

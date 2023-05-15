@@ -15,15 +15,7 @@ interface ITicketFormProps {
   descriptionPlaceholder?: string;
 }
 
-const TicketForm: React.FunctionComponent<ITicketFormProps> = ({
-  ticketObject,
-  title,
-  setTitle,
-  description,
-  setDescription,
-  titlePlaceholder,
-  descriptionPlaceholder
-}) => {
+const TicketForm: React.FunctionComponent<ITicketFormProps> = ({ticketObject, title, setTitle, description, setDescription}) => {
   React.useEffect(() => {
     setTitle(ticketObject.title);
     setDescription(ticketObject.description);
@@ -31,20 +23,29 @@ const TicketForm: React.FunctionComponent<ITicketFormProps> = ({
 
   return (
     <form className={styles.form}>
-      <div className={styles.title}>
-        <CustomInput
-          placeholder={titlePlaceholder ? titlePlaceholder : 'Название задачи'}
-          value={title}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTitle(e.target.value)}
-        />
-      </div>
+      <label>
+        <div className={styles.input_title}>Заголовок задачи</div>
 
-      <textarea
-        className={styles.description}
-        placeholder={descriptionPlaceholder ? descriptionPlaceholder : 'Описание задачи'}
-        defaultValue={description}
-        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setDescription(e.target.value)}
-      />
+        <div className={styles.title}>
+          <CustomInput value={title} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTitle(e.target.value)} />
+        </div>
+      </label>
+
+      {/* <label>
+        <div className={styles.input_title}>Наименование доски</div>
+        <div className={styles.type}>
+          <CustomInput value={typeBoard} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTypeBoard(e.target.value)} />
+        </div>
+      </label> */}
+
+      <label>
+        <div className={styles.input_title}>Описание задачи</div>
+        <textarea
+          className={styles.description}
+          defaultValue={description}
+          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setDescription(e.target.value)}
+        />
+      </label>
     </form>
   );
 };

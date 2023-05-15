@@ -1,2 +1,2 @@
-const url: string = 'http://localhost:5000/task';
+const url: string = 'http://localhost:5000';
 export {url};

@@ -11,11 +11,10 @@ import TicketForm from './TicketForm/TicketForm';
 
 export interface ITicket {
   completed: boolean;
-  userId: number;
+  userid: number;
   id: number;
   title: string;
   description: string;
-  typeboard: string;
 }
 
 interface ITicketProps {
@@ -35,7 +34,7 @@ const Ticket: React.FunctionComponent<ITicketProps> = ({ticketObject}) => {
     setisDidTask(prev => !prev);
     const task = ticketObject;
     task.completed = !isDidTask;
-    await fetch(`${url}/${ticketObject.id}`, {
+    await fetch(`${url}/task/${ticketObject.id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json;charset=utf-8'
@@ -44,11 +43,11 @@ const Ticket: React.FunctionComponent<ITicketProps> = ({ticketObject}) => {
     });
   }
 
-  async function updateTextTask(title: string, description: string) {
+  async function updateTextTask() {
     const task = ticketObject;
     task.title = title;
     task.description = description;
-    await fetch(`${url}/${ticketObject.id}`, {
+    await fetch(`${url}/task/${ticketObject.id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json;charset=utf-8'
@@ -59,7 +58,7 @@ const Ticket: React.FunctionComponent<ITicketProps> = ({ticketObject}) => {
 
   function onModalClose(modalStatus: boolean) {
     setIsModalActive(modalStatus);
-    updateTextTask(title, description);
+    updateTextTask();
   }
 
   function labelClickHandler(e: React.MouseEvent<HTMLLabelElement>) {
@@ -70,7 +69,7 @@ const Ticket: React.FunctionComponent<ITicketProps> = ({ticketObject}) => {
     e.stopPropagation();
     e.preventDefault();
 
-    await fetch(`${url}/${ticketObject.id}`, {
+    await fetch(`${url}/task/${ticketObject.id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json;charset=utf-8'
