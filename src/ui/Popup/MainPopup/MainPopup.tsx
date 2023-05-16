@@ -6,9 +6,8 @@ import styles from './MainPopup.module.scss';
 
 interface IMainPopupProps {
   isOpened: boolean;
-  onPrevArrowClick?: any;
   title?: string;
-  onClose: any;
+  onClose: (modalStatus: boolean) => void;
   children: React.ReactNode;
 }
 

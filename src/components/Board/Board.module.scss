@@ -1,0 +1,27 @@
+.board {
+  background: rgb(255, 255, 255);
+  padding: 20px;
+
+  max-width: 50%;
+  min-width: 500px;
+  min-height: 50vh;
+
+  margin-left: 10px;
+  border-radius: 10px;
+}
+.head {
+  font-size: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+
+  button {
+    padding-top: 0px;
+    padding-right: 10px;
+    padding-left: 10px;
+    background: rgb(243, 243, 243);
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+  }
+}

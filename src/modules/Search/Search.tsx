@@ -6,7 +6,7 @@ import styles from './Search.module.scss';
 
 interface ISearchProps {
   filter: string;
-  searchFunc: any;
+  searchFunc: (value: string) => void;
 }
 const Search: React.FunctionComponent<ISearchProps> = ({filter, searchFunc}) => {
   return (

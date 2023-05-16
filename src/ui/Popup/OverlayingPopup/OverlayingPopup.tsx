@@ -5,7 +5,7 @@ import Portal from '../Portal/Portal';
 
 interface IOverlayingPopupProps {
   isActive: boolean;
-  onClose: any;
+  onClose: (modalStatus: boolean) => void;
   children: React.ReactNode;
 }
 

@@ -5,24 +5,27 @@ import cross from '../../assets/icon/cross.png';
 import TicketContext, {ITicketContext} from '../../context/TicketContext';
 import MainPopup from '../../ui/Popup/MainPopup/MainPopup';
 import CustomCheck from '../../ui/input/CustomCheck/CustomCheck';
+import {IBoard} from '../Board/Board';
 
 import styles from './Ticket.module.scss';
 import TicketForm from './TicketForm/TicketForm';
 
 export interface ITicket {
   completed: boolean;
-  userid: number;
+  user_id: number;
   id: number;
   title: string;
   description: string;
+  board_id: number;
 }
 
 interface ITicketProps {
   ticketObject: ITicket;
+  board: IBoard;
   setTickets: React.Dispatch<React.SetStateAction<ITicket[]>>;
 }
 
-const Ticket: React.FunctionComponent<ITicketProps> = ({ticketObject}) => {
+const Ticket: React.FunctionComponent<ITicketProps> = ({ticketObject, board}) => {
   const [isModalActive, setIsModalActive] = useState<boolean>(false);
   const [isDidTask, setisDidTask] = useState<boolean>(ticketObject.completed);
   const [title, setTitle] = useState<string>(ticketObject.title);
@@ -32,7 +35,7 @@ const Ticket: React.FunctionComponent<ITicketProps> = ({ticketObject}) => {
 
   async function updateStatusTask() {
     setisDidTask(prev => !prev);
-    const task = ticketObject;
+    const task = {...ticketObject};
     task.completed = !isDidTask;
     await fetch(`${url}/task/${ticketObject.id}`, {
       method: 'PUT',
@@ -44,7 +47,7 @@ const Ticket: React.FunctionComponent<ITicketProps> = ({ticketObject}) => {
   }
 
   async function updateTextTask() {
-    const task = ticketObject;
+    const task = {...ticketObject};
     task.title = title;
     task.description = description;
     await fetch(`${url}/task/${ticketObject.id}`, {
@@ -75,6 +78,26 @@ const Ticket: React.FunctionComponent<ITicketProps> = ({ticketObject}) => {
         'Content-Type': 'application/json;charset=utf-8'
       }
     });
+
+    let boards = [...taskContext.boards];
+    let currentBoard = {};
+    for (let i = 0; i < boards.length; i++) {
+      if (boards[i].id === board.id) {
+        boards[i].id_tasks = boards[i].id_tasks.filter((element: number) => element !== ticketObject.id);
+        currentBoard = boards[i];
+      }
+    }
+
+    await fetch(`${url}/board/${board.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      },
+      body: JSON.stringify(currentBoard)
+    });
+
+    taskContext.setBoards(boards);
+
     taskContext.setTickets(taskContext.tickets.filter(element => element.id != ticketObject.id));
   }
 

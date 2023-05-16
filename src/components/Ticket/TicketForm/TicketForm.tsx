@@ -6,7 +6,7 @@ import {ITicket} from '../Ticket';
 import styles from './TicketForm.module.scss';
 
 interface ITicketFormProps {
-  ticketObject: ITicket;
+  ticketObject: ITicket | null;
   setTitle: React.Dispatch<React.SetStateAction<string>>;
   setDescription: React.Dispatch<React.SetStateAction<string>>;
   title: string;
@@ -17,8 +17,10 @@ interface ITicketFormProps {
 
 const TicketForm: React.FunctionComponent<ITicketFormProps> = ({ticketObject, title, setTitle, description, setDescription}) => {
   React.useEffect(() => {
-    setTitle(ticketObject.title);
-    setDescription(ticketObject.description);
+    if (ticketObject) {
+      setTitle(ticketObject.title);
+      setDescription(ticketObject.description);
+    }
   }, []);
 
   return (

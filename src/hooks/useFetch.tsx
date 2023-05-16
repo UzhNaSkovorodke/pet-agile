@@ -3,7 +3,7 @@ import {useEffect, useRef, useState} from 'react';
 export function useFetch(url: string, options?: any) {
   const [isLoading, setLoading] = useState(true);
   const [response, setResponse] = useState(null);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<unknown>(null);
   const cache = useRef<any>({});
 
   useEffect(() => {
@@ -17,7 +17,7 @@ export function useFetch(url: string, options?: any) {
           const json = await response.json();
           cache.current[url] = json;
           setResponse(json);
-        } catch (error: any) {
+        } catch (error: unknown) {
           setError(error);
         }
       }
