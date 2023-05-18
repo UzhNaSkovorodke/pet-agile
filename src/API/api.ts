@@ -41,9 +41,10 @@ const fetchBoard = {
     await axios.delete(`${url}/board/`, {params: {id: id}});
   },
 
-  async updateBoard(id: number, board: object) {
-    //ниже в board итак будет лежать id
-    let {data} = await axios.put(`${url}/board/${id}`, {...board, id: id});
+  async updateBoard(board: object) {
+    console.log({...board});
+
+    let {data} = await axios.put(`${url}/board/`, {...board});
     return data;
   }
 };

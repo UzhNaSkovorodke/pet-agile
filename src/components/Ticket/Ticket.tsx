@@ -65,7 +65,7 @@ const Ticket: React.FunctionComponent<ITicketProps> = ({ticketObject, board}) =>
         currentBoard = boards[i];
       }
     }
-    fetchBoard.updateBoard(board.id, currentBoard);
+    fetchBoard.updateBoard(currentBoard);
     taskContext.setBoards(boards);
     taskContext.setTickets(taskContext.tickets.filter(element => element.id != ticketObject.id));
   }

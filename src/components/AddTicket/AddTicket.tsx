@@ -30,7 +30,7 @@ export default function AddTicket({board}: IAddTicketProps) {
 
   async function createTask() {
     fetchTask.createTask(newTask);
-    fetchBoard.updateBoard(board.id, {...board, id_tasks: [...board.id_tasks, newTask.id]});
+    fetchBoard.updateBoard({...board, id_tasks: [...board.id_tasks, newTask.id]});
 
     let boards = [...taskContext.boards];
     for (let i = 0; i < boards.length; i++) {
