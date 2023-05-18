@@ -9,7 +9,7 @@ const Portal: React.FunctionComponent<IPortalProps> = ({children}) => {
   const [container] = useState(() => document.createElement('div'));
 
   useEffect(() => {
-    document.body.appendChild(container); //добавляет узел в конец списка дочерних элементов, чтобы если вставили несколько div то последний был поверх предыдущего
+    document.body.appendChild(container);
     return () => {
       document.body.removeChild(container);
     };

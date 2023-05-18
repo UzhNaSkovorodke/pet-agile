@@ -1,15 +1,15 @@
 import {useContext, useState} from 'react';
 
-import {url} from '../../API/api';
+import {fetchBoard, fetchTask} from '../../API/api';
 import TicketContext, {ITicketContext} from '../../context/TicketContext';
+import {IBoardData} from '../../layout/Kanban/Kanban';
 import MainPopup from '../../ui/Popup/MainPopup/MainPopup';
-import {IBoard} from '../Board/Board';
 import TicketForm from '../Ticket/TicketForm/TicketForm';
 
 import styles from './AddTicket.module.scss';
 
 interface IAddTicketProps {
-  board: IBoard;
+  board: IBoardData;
 }
 
 export default function AddTicket({board}: IAddTicketProps) {
@@ -29,21 +29,8 @@ export default function AddTicket({board}: IAddTicketProps) {
   const taskContext = useContext<ITicketContext>(TicketContext);
 
   async function createTask() {
-    await fetch(`${url}/task`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8'
-      },
-      body: JSON.stringify(newTask)
-    });
-
-    await fetch(`${url}/board/boardtasks/${board.id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8'
-      },
-      body: JSON.stringify({id_tasks: [...board.id_tasks, newTask.id]})
-    });
+    fetchTask.createTask(newTask);
+    fetchBoard.updateBoard(board.id, {...board, id_tasks: [...board.id_tasks, newTask.id]});
 
     let boards = [...taskContext.boards];
     for (let i = 0; i < boards.length; i++) {

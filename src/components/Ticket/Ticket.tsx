@@ -1,11 +1,11 @@
 import React, {useContext, useState} from 'react';
 
-import {url} from '../../API/api';
+import {fetchBoard, fetchTask, url} from '../../API/api';
 import cross from '../../assets/icon/cross.png';
 import TicketContext, {ITicketContext} from '../../context/TicketContext';
+import {IBoardData} from '../../layout/Kanban/Kanban';
 import MainPopup from '../../ui/Popup/MainPopup/MainPopup';
 import CustomCheck from '../../ui/input/CustomCheck/CustomCheck';
-import {IBoard} from '../Board/Board';
 
 import styles from './Ticket.module.scss';
 import TicketForm from './TicketForm/TicketForm';
@@ -21,7 +21,7 @@ export interface ITicket {
 
 interface ITicketProps {
   ticketObject: ITicket;
-  board: IBoard;
+  board: IBoardData;
   setTickets: React.Dispatch<React.SetStateAction<ITicket[]>>;
 }
 
@@ -35,28 +35,12 @@ const Ticket: React.FunctionComponent<ITicketProps> = ({ticketObject, board}) =>
 
   async function updateStatusTask() {
     setisDidTask(prev => !prev);
-    const task = {...ticketObject};
-    task.completed = !isDidTask;
-    await fetch(`${url}/task/${ticketObject.id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8'
-      },
-      body: JSON.stringify(task)
-    });
+    const task = {...ticketObject, completed: !isDidTask};
+    fetchTask.updateTask(ticketObject.id, task);
   }
 
   async function updateTextTask() {
-    const task = {...ticketObject};
-    task.title = title;
-    task.description = description;
-    await fetch(`${url}/task/${ticketObject.id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8'
-      },
-      body: JSON.stringify(task)
-    });
+    fetchTask.updateTask(ticketObject.id, {...ticketObject, title: title, description: description});
   }
 
   function onModalClose(modalStatus: boolean) {
@@ -71,33 +55,18 @@ const Ticket: React.FunctionComponent<ITicketProps> = ({ticketObject, board}) =>
   async function deleteTicket(e: React.MouseEvent<HTMLButtonElement>) {
     e.stopPropagation();
     e.preventDefault();
-
-    await fetch(`${url}/task/${ticketObject.id}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8'
-      }
-    });
+    fetchTask.deleteTask(ticketObject.id);
 
     let boards = [...taskContext.boards];
-    let currentBoard = {};
+    let currentBoard = {}; //зачем это
     for (let i = 0; i < boards.length; i++) {
       if (boards[i].id === board.id) {
         boards[i].id_tasks = boards[i].id_tasks.filter((element: number) => element !== ticketObject.id);
         currentBoard = boards[i];
       }
     }
-
-    await fetch(`${url}/board/${board.id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8'
-      },
-      body: JSON.stringify(currentBoard)
-    });
-
+    fetchBoard.updateBoard(board.id, currentBoard);
     taskContext.setBoards(boards);
-
     taskContext.setTickets(taskContext.tickets.filter(element => element.id != ticketObject.id));
   }
 

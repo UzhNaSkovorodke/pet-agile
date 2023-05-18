@@ -1,23 +1,18 @@
 import * as React from 'react';
 
+import {IBoardData} from '../../layout/Kanban/Kanban';
 import AddTicket from '../AddTicket/AddTicket';
 import Ticket, {ITicket} from '../Ticket/Ticket';
 
 import styles from './Board.module.scss';
 
-export interface IBoard {
-  tickets: ITicket[];
-  title: string;
-  id: number;
-  id_tasks: number[];
-}
-
 interface IBoardProps {
-  board: IBoard;
+  tickets: ITicket[];
+  board: IBoardData;
   setTickets: React.Dispatch<React.SetStateAction<ITicket[]>>;
 }
 
-const Board: React.FunctionComponent<IBoardProps> = ({board, setTickets}) => {
+const Board: React.FunctionComponent<IBoardProps> = ({board, setTickets, tickets}) => {
   return (
     <div className={styles.board}>
       <div className={styles.head}>
@@ -25,8 +20,8 @@ const Board: React.FunctionComponent<IBoardProps> = ({board, setTickets}) => {
         <button>...</button>
       </div>
       <div className={styles.main}>
-        {board.tickets.length > 0 &&
-          board.tickets.map((element: ITicket) => <Ticket board={board} key={element.id} setTickets={setTickets} ticketObject={element} />)}
+        {tickets.length > 0 &&
+          tickets.map((element: ITicket) => <Ticket board={board} key={element.id} setTickets={setTickets} ticketObject={element} />)}
       </div>
 
       <AddTicket board={board} />
